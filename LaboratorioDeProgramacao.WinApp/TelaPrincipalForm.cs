@@ -1,14 +1,12 @@
-using LaboratorioDeProgramacao.Dominio.ModuloMateria;
+using LaboratorioDeProgramacao.Dominio.ModuloFornecedor;
 using LaboratorioDeProgramacao.Dominio.ModuloProduto;
-using LaboratorioDeProgramacao.Dominio.ModuloQuestao;
-using LaboratorioDeProgramacao.Dominio.ModuloTeste;
-using LaboratorioDeProgramacao.Infra.Dados.Sql.ModuloDisciplina;
-using LaboratorioDeProgramacao.Infra.Dados.Sql.ModuloMateria;
-using LaboratorioDeProgramacao.Infra.Dados.Sql.ModuloQuestao;
-using LaboratorioDeProgramacao.Infra.Dados.Sql.ModuloTeste;
+using LaboratorioDeProgramacao.Dominio.ModuloVenda;
+using LaboratorioDeProgramacao.Infra.Dados.Sql.ModuloFornecedor;
+using LaboratorioDeProgramacao.Infra.Dados.Sql.ModuloItemVenda;
+using LaboratorioDeProgramacao.Infra.Dados.Sql.ModuloProduto;
+using LaboratorioDeProgramacao.Infra.Dados.Sql.ModuloVenda;
 using LaboratorioDeProgramacao.WinApp.Config;
-using LaboratorioDeProgramacao.WinApp.ModuloDisciplina;
-using LaboratorioDeProgramacao.WinApp.ModuloMateria;
+using LaboratorioDeProgramacao.WinApp.ModuloProduto;
 using LaboratorioDeProgramacao.WinApp.ModuloQuestao;
 using LaboratorioDeProgramacao.WinApp.ModuloTeste;
 using LaboratorioDeProgramacao.WinApp.Translation;
@@ -19,10 +17,10 @@ namespace LaboratorioDeProgramacao.WinApp
     {
         private ControladorBase controlador;
 
-        private IRepositorioProduto repositorioDisciplina = new RepositorioProdutoSql();
-        private IRepositorioMateria repositorioMateria = new RepositorioMateriaSql();
-        private IRepositorioQuestao repositorioQuestao = new RepositorioQuestaoSql();
-        private IRepositorioTeste repositorioTeste = new RepositorioTesteSql();
+        private IRepositorioProduto repositorioProduto = new RepositorioProdutoSql();
+        private IRepositorioFornecedor repositorioFornecedor = new RepositorioFornecedorSql();
+        private IRepositorioVenda repositorioVenda = new RepositorioVendaSql();
+        private IRepositorioItemVenda repositorioItemVenda = new RepositorioItemVendaSql();
 
         public static TelaPrincipalForm Tela { get; private set; }
 
@@ -46,30 +44,23 @@ namespace LaboratorioDeProgramacao.WinApp
             lableRodape.Text = status;
         }
 
-        private void DisciplinasMenuItem_Click(object sender, EventArgs e)
+        private void ProdutosMenuItem_Click(object sender, EventArgs e)
         {
-            controlador = new ControladorDisciplina(repositorioDisciplina, repositorioMateria);
+            controlador = new ControladorProduto(repositorioProduto, repositorioFornecedor, repositorioVenda);
 
             ConfigurarTelaPrincipal(controlador);
         }
 
-        private void materiasMenuItem_Click(object sender, EventArgs e)
+        private void FornecedoresMenuItem_Click(object sender, EventArgs e)
         {
-            controlador = new ControladorMateria(repositorioMateria, repositorioDisciplina, repositorioQuestao);
+            controlador = new ControladorFornecedor(repositorioFornecedor);
 
             ConfigurarTelaPrincipal(controlador);
         }
 
-        private void questoesMenuItem_Click(object sender, EventArgs e)
+        private void VendasMenuItem_Click(object sender, EventArgs e)
         {
-            controlador = new ControladorQuestao(repositorioQuestao, repositorioDisciplina, repositorioTeste);
-
-            ConfigurarTelaPrincipal(controlador);
-        }
-
-        private void testesMenuItem_Click(object sender, EventArgs e)
-        {
-            controlador = new ControladorTeste(repositorioTeste, repositorioDisciplina);
+            controlador = new ControladorVenda(repositorioVenda, repositorioProduto, repositorioItemVenda);
 
             ConfigurarTelaPrincipal(controlador);
         }
@@ -147,9 +138,9 @@ namespace LaboratorioDeProgramacao.WinApp
 
         private void ConfigurarTextos()
         {
-            DisciplinasMenuItem.Text = servicoDeTraducao.ObterTexto("Disciplines");
-            materiasMenuItem.Text = servicoDeTraducao.ObterTexto("Subjects");
-            questoesMenuItem.Text = servicoDeTraducao.ObterTexto("Questions");
+            produtosMenuItem.Text = servicoDeTraducao.ObterTexto("Products");
+            fornecedoresMenuItem.Text = servicoDeTraducao.ObterTexto("Suppliers");
+            vendasMenuItem.Text = servicoDeTraducao.ObterTexto("Sales");
             toolStripButtonSelectedLanguage.Text = servicoDeTraducao.ObterTexto("SelectedLanguage");
             inglêsToolStripMenuItem.Text = servicoDeTraducao.ObterTexto("English");
             portuguêsToolStripMenuItem.Text = servicoDeTraducao.ObterTexto("Portuguese");

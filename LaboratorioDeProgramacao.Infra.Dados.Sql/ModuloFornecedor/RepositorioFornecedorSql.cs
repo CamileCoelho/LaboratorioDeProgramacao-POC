@@ -2,7 +2,7 @@
 
 namespace LaboratorioDeProgramacao.Infra.Dados.Sql.ModuloFornecedor
 {
-    public class RepositorioFornecedorSql : RepositorioBaseSql<Fornecedor, MapeadorFornecedor>, IRepositorioItemVenda
+    public class RepositorioFornecedorSql : RepositorioBaseSql<Fornecedor, MapeadorFornecedor>, IRepositorioFornecedor
     {
         protected override string sqlInserir => @"INSERT INTO [FORNECEDOR]
                                                  ([NOME], [ENDERECO])

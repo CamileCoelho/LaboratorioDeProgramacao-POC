@@ -1,6 +1,4 @@
 ﻿using LaboratorioDeProgramacao.Dominio.ModuloProduto;
-using LaboratorioDeProgramacao.Dominio.ModuloQuestao;
-using LaboratorioDeProgramacao.Dominio.ModuloTeste;
 
 namespace LaboratorioDeProgramacao.WinApp.ModuloQuestao
 {

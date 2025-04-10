@@ -1,5 +1,4 @@
 ﻿using LaboratorioDeProgramacao.Dominio.ModuloFornecedor;
-using LaboratorioDeProgramacao.Dominio.ModuloMateria;
 
 namespace LaboratorioDeProgramacao.Dominio.ModuloProduto
 {

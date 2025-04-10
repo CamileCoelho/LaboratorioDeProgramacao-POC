@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TelaPrincipalForm));
             pictureBox1 = new PictureBox();
-            DisciplinasMenuItem = new ToolStripMenuItem();
+            produtosMenuItem = new ToolStripMenuItem();
             panelRegistros = new Panel();
             toolStrip1 = new ToolStrip();
             btnHome = new ToolStripButton();
@@ -57,13 +57,12 @@
             inglêsToolStripMenuItem = new ToolStripMenuItem();
             portuguêsToolStripMenuItem = new ToolStripMenuItem();
             espanholToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator6 = new ToolStripSeparator();
             rodape = new StatusStrip();
             lableRodape = new ToolStripStatusLabel();
             menuStrip1 = new MenuStrip();
-            materiasMenuItem = new ToolStripMenuItem();
-            questoesMenuItem = new ToolStripMenuItem();
-            testesMenuItem = new ToolStripMenuItem();
-            toolStripSeparator6 = new ToolStripSeparator();
+            fornecedoresMenuItem = new ToolStripMenuItem();
+            vendasMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panelRegistros.SuspendLayout();
             toolStrip1.SuspendLayout();
@@ -81,13 +80,13 @@
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
-            // DisciplinasMenuItem
+            // produtosMenuItem
             // 
-            DisciplinasMenuItem.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            DisciplinasMenuItem.Name = "DisciplinasMenuItem";
-            DisciplinasMenuItem.Size = new Size(88, 24);
-            DisciplinasMenuItem.Text = "Disciplina";
-            DisciplinasMenuItem.Click += DisciplinasMenuItem_Click;
+            produtosMenuItem.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            produtosMenuItem.Name = "produtosMenuItem";
+            produtosMenuItem.Size = new Size(82, 24);
+            produtosMenuItem.Text = "Produtos";
+            produtosMenuItem.Click += ProdutosMenuItem_Click;
             // 
             // panelRegistros
             // 
@@ -363,6 +362,13 @@
             espanholToolStripMenuItem.Text = "Espanhol";
             espanholToolStripMenuItem.Click += espanholToolStripMenuItem_Click;
             // 
+            // toolStripSeparator6
+            // 
+            toolStripSeparator6.Alignment = ToolStripItemAlignment.Right;
+            toolStripSeparator6.AutoSize = false;
+            toolStripSeparator6.Name = "toolStripSeparator6";
+            toolStripSeparator6.Size = new Size(6, 39);
+            // 
             // rodape
             // 
             rodape.ImageScalingSize = new Size(20, 20);
@@ -384,7 +390,7 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { DisciplinasMenuItem, materiasMenuItem, questoesMenuItem, testesMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { produtosMenuItem, fornecedoresMenuItem, vendasMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(8, 3, 0, 3);
@@ -392,33 +398,19 @@
             menuStrip1.TabIndex = 4;
             menuStrip1.Text = "menuStrip1";
             // 
-            // materiasMenuItem
+            // fornecedoresMenuItem
             // 
-            materiasMenuItem.Name = "materiasMenuItem";
-            materiasMenuItem.Size = new Size(74, 24);
-            materiasMenuItem.Text = "Matéria";
-            materiasMenuItem.Click += materiasMenuItem_Click;
+            fornecedoresMenuItem.Name = "fornecedoresMenuItem";
+            fornecedoresMenuItem.Size = new Size(112, 24);
+            fornecedoresMenuItem.Text = "Fornecedores";
+            fornecedoresMenuItem.Click += FornecedoresMenuItem_Click;
             // 
-            // questoesMenuItem
+            // vendasMenuItem
             // 
-            questoesMenuItem.Name = "questoesMenuItem";
-            questoesMenuItem.Size = new Size(84, 24);
-            questoesMenuItem.Text = "Questões";
-            questoesMenuItem.Click += questoesMenuItem_Click;
-            // 
-            // testesMenuItem
-            // 
-            testesMenuItem.Name = "testesMenuItem";
-            testesMenuItem.Size = new Size(63, 24);
-            testesMenuItem.Text = "Testes";
-            testesMenuItem.Click += testesMenuItem_Click;
-            // 
-            // toolStripSeparator6
-            // 
-            toolStripSeparator6.Alignment = ToolStripItemAlignment.Right;
-            toolStripSeparator6.AutoSize = false;
-            toolStripSeparator6.Name = "toolStripSeparator6";
-            toolStripSeparator6.Size = new Size(6, 39);
+            vendasMenuItem.Name = "vendasMenuItem";
+            vendasMenuItem.Size = new Size(70, 24);
+            vendasMenuItem.Text = "Vendas";
+            vendasMenuItem.Click += VendasMenuItem_Click;
             // 
             // TelaPrincipalForm
             // 
@@ -432,9 +424,8 @@
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             Margin = new Padding(4);
             Name = "TelaPrincipalForm";
-            ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "   Testes Dona Mariana";
+            Text = "   Lanchonete da Camile";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panelRegistros.ResumeLayout(false);
             panelRegistros.PerformLayout();
@@ -451,7 +442,7 @@
         #endregion
 
         private PictureBox pictureBox1;
-        private ToolStripMenuItem DisciplinasMenuItem;
+        private ToolStripMenuItem produtosMenuItem;
         private Panel panelRegistros;
         private ToolStrip toolStrip1;
         private ToolStripButton btnHome;
@@ -474,9 +465,8 @@
         private StatusStrip rodape;
         private ToolStripStatusLabel lableRodape;
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem materiasMenuItem;
-        private ToolStripMenuItem questoesMenuItem;
-        private ToolStripMenuItem testesMenuItem;
+        private ToolStripMenuItem fornecedoresMenuItem;
+        private ToolStripMenuItem vendasMenuItem;
         private ToolStripButton btnDuplicar;
         private ToolStripButton btnVisualizarGabarito;
         private ToolStripButton btnGerarPdf;
