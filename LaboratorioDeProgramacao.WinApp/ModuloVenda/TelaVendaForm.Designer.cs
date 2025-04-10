@@ -39,13 +39,13 @@
             btnRemover = new Button();
             lblTabelaItens = new Label();
             dateTimePicker1 = new DateTimePicker();
-            comboBox1 = new ComboBox();
+            cmbFormaPagamento = new ComboBox();
             lblFormaPgto = new Label();
             lblQuantidade = new Label();
             cmbItens = new ComboBox();
             dateTimePicker = new DateTimePicker();
             txtQuantidade = new TextBox();
-            this.txtCpf = new TextBox();
+            txtCpf = new TextBox();
             SuspendLayout();
             // 
             // txtId
@@ -132,7 +132,6 @@
             // 
             // btnAdicionar
             // 
-            btnAdicionar.Enabled = false;
             btnAdicionar.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnAdicionar.Location = new Point(569, 248);
             btnAdicionar.Margin = new Padding(3, 4, 3, 4);
@@ -145,7 +144,6 @@
             // 
             // btnRemover
             // 
-            btnRemover.Enabled = false;
             btnRemover.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnRemover.Location = new Point(683, 248);
             btnRemover.Margin = new Padding(3, 4, 3, 4);
@@ -174,17 +172,16 @@
             dateTimePicker1.Size = new Size(519, 27);
             dateTimePicker1.TabIndex = 91;
             // 
-            // comboBox1
+            // cmbFormaPagamento
             // 
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.Enabled = false;
-            comboBox1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(271, 188);
-            comboBox1.Margin = new Padding(3, 4, 3, 4);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(519, 33);
-            comboBox1.TabIndex = 93;
+            cmbFormaPagamento.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbFormaPagamento.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            cmbFormaPagamento.FormattingEnabled = true;
+            cmbFormaPagamento.Location = new Point(271, 188);
+            cmbFormaPagamento.Margin = new Padding(3, 4, 3, 4);
+            cmbFormaPagamento.Name = "cmbFormaPagamento";
+            cmbFormaPagamento.Size = new Size(519, 33);
+            cmbFormaPagamento.TabIndex = 93;
             // 
             // lblFormaPgto
             // 
@@ -209,7 +206,6 @@
             // cmbItens
             // 
             cmbItens.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbItens.Enabled = false;
             cmbItens.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
             cmbItens.FormattingEnabled = true;
             cmbItens.Location = new Point(271, 248);
@@ -236,24 +232,24 @@
             // 
             // txtCpf
             // 
-            this.txtCpf.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            this.txtCpf.Location = new Point(271, 128);
-            this.txtCpf.Margin = new Padding(3, 4, 3, 4);
-            this.txtCpf.Name = "txtCpf";
-            this.txtCpf.Size = new Size(519, 34);
-            this.txtCpf.TabIndex = 101;
+            txtCpf.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtCpf.Location = new Point(271, 134);
+            txtCpf.Margin = new Padding(3, 4, 3, 4);
+            txtCpf.Name = "txtCpf";
+            txtCpf.Size = new Size(519, 34);
+            txtCpf.TabIndex = 101;
             // 
             // TelaVendaForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(826, 663);
-            Controls.Add(this.txtCpf);
+            Controls.Add(txtCpf);
             Controls.Add(txtQuantidade);
             Controls.Add(dateTimePicker);
             Controls.Add(cmbItens);
             Controls.Add(lblQuantidade);
-            Controls.Add(comboBox1);
+            Controls.Add(cmbFormaPagamento);
             Controls.Add(lblFormaPgto);
             Controls.Add(lblTabelaItens);
             Controls.Add(btnAdicionar);
@@ -291,9 +287,9 @@
         private ComboBox cmbAlternativas;
         private Label lblTabelaItens;
         private DateTimePicker dateTimePicker1;
-        private ComboBox comboBox1;
+        private ComboBox cmbFormaPagamento;
         private Label lblFormaPgto;
-        private TextBox textBox1;
+        private TextBox txtCpf;
         private TextBox textBox2;
         private Label lblQuantidade;
         private ComboBox cmbItens;

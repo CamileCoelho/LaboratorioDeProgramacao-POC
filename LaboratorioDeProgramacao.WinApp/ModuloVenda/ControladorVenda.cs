@@ -1,25 +1,26 @@
 ﻿using LaboratorioDeProgramacao.Dominio.ModuloProduto;
+using LaboratorioDeProgramacao.Dominio.ModuloVenda;
+using LaboratorioDeProgramacao.Infra.Dados.Sql.ModuloVenda;
+using System.Text.RegularExpressions;
 
 namespace LaboratorioDeProgramacao.WinApp.ModuloVenda
 {
     public class ControladorVenda : ControladorBase
     {
-        private IRepositorioTeste repositorioTeste;
-        private IRepositorioQuestao repositorioQuestao;
-        private IRepositorioProduto repositorioDisciplina;
-        private TabelaVendaControl tabelaQuestao;
+        private readonly IRepositorioVenda repositorioVenda;
+        private readonly IRepositorioProduto repositorioProduto;
+        private TabelaVendaControl tabelaVenda;
 
-        public ControladorVenda(IRepositorioQuestao repositorioQuestao, IRepositorioProduto repositorioDisciplina, IRepositorioTeste repositorioTeste)
+        public ControladorVenda(IRepositorioVenda repositorioVenda, IRepositorioProduto repositorioProduto)
         {
-            this.repositorioTeste = repositorioTeste;
-            this.repositorioQuestao = repositorioQuestao;
-            this.repositorioDisciplina = repositorioDisciplina;
+            this.repositorioVenda = repositorioVenda;
+            this.repositorioProduto = repositorioProduto;
         }
 
-        public override string ToolTipInserir => "Cadastrar Questão";
-        public override string ToolTipEditar => "Editar Questão Existente";
-        public override string ToolTipExcluir => "Excluir Questão Existente";
-        public override string ToolTipHome => "Voltar a tela inicial";
+        public override string ToolTipInserir => TelaPrincipalForm.servicoDeTraducao.ObterTexto("RegisterSale");
+        public override string ToolTipEditar => TelaPrincipalForm.servicoDeTraducao.ObterTexto("EditSale");
+        public override string ToolTipExcluir => TelaPrincipalForm.servicoDeTraducao.ObterTexto("DeleteSale");
+        public override string ToolTipHome => TelaPrincipalForm.servicoDeTraducao.ObterTexto("GoToHome");
 
         public override bool HomeHabilitado => true;
         public override bool InserirHabilitado => true;
@@ -29,130 +30,136 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloVenda
 
         public override void Inserir()
         {
-            TelaVendaForm tela = new(repositorioQuestao.SelecionarTodos(), repositorioDisciplina.SelecionarTodos());
+            var produtos = repositorioProduto.SelecionarTodos();
+
+            TelaVendaForm tela = new(produtos);
 
             if (tela.ShowDialog() == DialogResult.OK)
             {
-                Questao questao = tela.ObterQuestao();
+                var venda = tela.ObterVenda();
 
-                questao.materia.questoes.Add(questao);
+                string validacao = ValidarVenda(venda);
 
-                repositorioQuestao.Inserir(questao);
+                if (!string.IsNullOrEmpty(validacao))
+                {
+                    TelaPrincipalForm.Tela.AtualizarRodape(validacao);
+                    return;
+                }
 
-                CarregarQuestoes();
+                repositorioVenda.Inserir(venda);
+
+                CarregarVendas();
             }
             else
-            {
                 TelaPrincipalForm.Tela.AtualizarRodape("");
-            }
         }
 
         public override void Editar()
         {
-            Questao questaoSelecionada = ObterQuestãoSelecionada();
+            var vendaSelecionada = ObterVendaSelecionada();
 
-            if (questaoSelecionada == null)
+            if (vendaSelecionada == null)
             {
-                MessageBox.Show($"Selecione um questao primeiro!",
-                    "Edição de Questão",
+                MessageBox.Show(
+                    TelaPrincipalForm.servicoDeTraducao.ObterTexto("SelectSaleWarning"),
+                    TelaPrincipalForm.servicoDeTraducao.ObterTexto("EditSale"),
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);
-
-                return;
-            }
-            if (repositorioTeste.SelecionarTodos().Any(x => x.questoes.Any(q => q == questaoSelecionada)))
-            {
-                MessageBox.Show($"Não é possivel editar essa questão pois ela possuí vinculo com ao menos um teste!",
-                    "Edição de Questão",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);
-
+                    MessageBoxIcon.Exclamation
+                );
                 return;
             }
 
-            TelaVendaForm tela = new(repositorioQuestao.SelecionarTodos(), repositorioDisciplina.SelecionarTodos());
+            var produtos = repositorioProduto.SelecionarTodos();
 
-            tela.ConfigurarTelaEdicao(questaoSelecionada);
+            var tela = new TelaVendaForm(produtos);
+            tela.ConfigurarTelaEdicao(vendaSelecionada);
 
             if (tela.ShowDialog() == DialogResult.OK)
             {
-                Questao questao = tela.ObterQuestao();
+                var novaVenda = tela.ObterVenda();
 
-                questao.materia.questoes.Remove(questaoSelecionada);
+                string validacao = ValidarVenda(novaVenda);
 
-                questao.materia.questoes.Add(questao);
+                if (!string.IsNullOrEmpty(validacao))
+                {
+                    TelaPrincipalForm.Tela.AtualizarRodape(validacao);
+                    return;
+                }
 
-                repositorioQuestao.Editar(questaoSelecionada, questao);
+                repositorioVenda.Editar(vendaSelecionada, novaVenda);
 
-                CarregarQuestoes();
+                CarregarVendas();
             }
             else
-            {
                 TelaPrincipalForm.Tela.AtualizarRodape("");
-            }
         }
 
         public override void Excluir()
         {
-            Questao questaoSelecionada = ObterQuestãoSelecionada();
+            var vendaSelecionada = ObterVendaSelecionada();
 
-            if (questaoSelecionada == null)
+            if (vendaSelecionada == null)
             {
-                MessageBox.Show($"Selecione um questao primeiro!",
-                    "Exclusão de Questão",
+                MessageBox.Show(
+                    TelaPrincipalForm.servicoDeTraducao.ObterTexto("SelectSaleWarning"),
+                    TelaPrincipalForm.servicoDeTraducao.ObterTexto("DeleteSale"),
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);
-
-                return;
-            }
-            if (repositorioTeste.SelecionarTodos().Any(x => x.questoes.Any(q => q == questaoSelecionada)))
-            {
-                MessageBox.Show($"Não é possivel excluír essa questão pois ela possuí vinculo com ao menos um teste!",
-                    "Exclusão de Questão",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);
-
+                    MessageBoxIcon.Exclamation
+                );
                 return;
             }
 
-            DialogResult opcaoEscolhida = MessageBox.Show(
-                $"Deseja excluir o questao {questaoSelecionada.id}?",
-                "Exclusão de Questóes",
+            var opcao = MessageBox.Show(
+                string.Format(TelaPrincipalForm.servicoDeTraducao.ObterTexto("DeleteSaleConfirmation"), vendaSelecionada.id),
+                TelaPrincipalForm.servicoDeTraducao.ObterTexto("DeleteSale"),
                 MessageBoxButtons.OKCancel,
-                MessageBoxIcon.Question);
+                MessageBoxIcon.Question
+            );
 
-            if (opcaoEscolhida == DialogResult.OK)
+            if (opcao == DialogResult.OK)
             {
-                repositorioQuestao.Excluir(questaoSelecionada);
-
-                questaoSelecionada.materia.questoes.Remove(questaoSelecionada);
-
-                CarregarQuestoes();
+                repositorioVenda.Excluir(vendaSelecionada);
+                CarregarVendas();
             }
         }
 
-        private void CarregarQuestoes()
+        private void CarregarVendas()
         {
-            List<Questao> questoes = repositorioQuestao.SelecionarTodos();
-
-            tabelaQuestao.AtualizarRegistros(questoes);
+            var vendas = repositorioVenda.SelecionarTodos();
+            tabelaVenda.AtualizarRegistros(vendas);
         }
 
-        private Questao ObterQuestãoSelecionada()
+        private Venda ObterVendaSelecionada()
         {
-            int id = tabelaQuestao.ObterNumeroClienteSelecionado();
+            int id = tabelaVenda.ObterNumeroVendaSelecionada();
+            return repositorioVenda.SelecionarPorId(id);
+        }
 
-            return repositorioQuestao.SelecionarPorId(id);
+        private string ValidarVenda(Venda venda)
+        {
+            if (!Regex.IsMatch(venda.cpf, @"^\d{3}\.\d{3}\.\d{3}\-\d{2}$"))
+                return TelaPrincipalForm.servicoDeTraducao.ObterTexto("InvalidCpf");
+
+            if (venda.data.Date > DateTime.Today)
+                return TelaPrincipalForm.servicoDeTraducao.ObterTexto("FutureDateError");
+
+            if (venda.itens.Count == 0)
+                return TelaPrincipalForm.servicoDeTraducao.ObterTexto("EmptyItemsError");
+
+            if (venda.itens.Any(i => i.quantidade <= 0))
+                return TelaPrincipalForm.servicoDeTraducao.ObterTexto("InvalidItemQuantity");
+
+            return "";
         }
 
         public override UserControl ObterListagem()
         {
-            if (tabelaQuestao == null)
-                tabelaQuestao = new TabelaVendaControl();
+            if (tabelaVenda == null)
+                tabelaVenda = new TabelaVendaControl();
 
-            CarregarQuestoes();
+            CarregarVendas();
 
-            return tabelaQuestao;
+            return tabelaVenda;
         }
     }
 }

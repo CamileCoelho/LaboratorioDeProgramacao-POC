@@ -1,194 +1,186 @@
-﻿using iText.Kernel.Pdf;
-using iText.Kernel.Pdf.Canvas.Draw;
-using iText.Layout;
-using iText.Layout.Element;
-using iText.Layout.Properties;
-using LaboratorioDeProgramacao.Dominio.ModuloQuestao;
-using LaboratorioDeProgramacao.Dominio.ModuloTeste;
-
-namespace LaboratorioDeProgramacao.WinApp.ModuloTeste
+﻿namespace LaboratorioDeProgramacao.WinApp.ModuloTeste
 {
     public partial class TelaGerarPdfForm : Form
     {
-        private Teste teste { get; set; }
+        //private Teste teste { get; set; }
 
-        public TelaGerarPdfForm(Teste teste)
-        {
-            InitializeComponent();
+        //public TelaGerarPdfForm(Teste teste)
+        //{
+        //    InitializeComponent();
 
-            this.ConfigurarDialog();
+        //    this.ConfigurarDialog();
 
-            this.teste = teste;
-        }
+        //    this.teste = teste;
+        //}
 
-        public void ConfigurarTelaPdf(Teste teste)
-        {
-            txtTitulo.Text = teste.titulo.ToString().Trim();
-        }
-
-
-        private void GerarPdfGabarito()
-        {
-            if (txtLocalizacao.Text == "")
-            {
-                TelaPrincipalForm.Tela.AtualizarRodape($"Você deve informar a localização do diretório!");
-                DialogResult = DialogResult.None;
-                return;
-            }
-
-            PdfWriter localizacao = new PdfWriter(txtLocalizacao.Text + "\\" + teste.id + "_gabarito" + ".pdf");
-            PdfDocument pdf = new(localizacao);
-            Document doc = new(pdf);
-
-            Paragraph header = new Paragraph("Gabarito do teste:")
-                .SetTextAlignment(TextAlignment.CENTER)
-                .SetFontSize(21);
-
-            Paragraph subheader = new Paragraph(teste.titulo)
-                .SetTextAlignment(TextAlignment.CENTER)
-                .SetFontSize(18)
-                .SetBold();
-
-            doc.Add(header);
-            doc.Add(subheader);
+        //public void ConfigurarTelaPdf(Teste teste)
+        //{
+        //    txtTitulo.Text = teste.titulo.ToString().Trim();
+        //}
 
 
-            doc.Add(new LineSeparator(new SolidLine(1f)));
-            doc.Add(new Paragraph(""));
+        //private void GerarPdfGabarito()
+        //{
+        //    if (txtLocalizacao.Text == "")
+        //    {
+        //        TelaPrincipalForm.Tela.AtualizarRodape($"Você deve informar a localização do diretório!");
+        //        DialogResult = DialogResult.None;
+        //        return;
+        //    }
 
-            int i = 1;
-            teste.questoes.ForEach(x =>
-            {
-                Paragraph questao = new Paragraph($"{i}) ")
-                    .SetTextAlignment(TextAlignment.LEFT)
-                    .SetFontSize(11)
-                    .SetBold();
+        //    PdfWriter localizacao = new PdfWriter(txtLocalizacao.Text + "\\" + teste.id + "_gabarito" + ".pdf");
+        //    PdfDocument pdf = new(localizacao);
+        //    Document doc = new(pdf);
 
-                x.alternativas.Where(x => x.alternativaCorreta == AlternativaCorretaEnum.Correta).ToList().ForEach(a => questao.Add(new Text(a.idLetra + " " + a.texto)));
+        //    Paragraph header = new Paragraph("Gabarito do teste:")
+        //        .SetTextAlignment(TextAlignment.CENTER)
+        //        .SetFontSize(21);
 
-                doc.Add(questao);
+        //    Paragraph subheader = new Paragraph(teste.titulo)
+        //        .SetTextAlignment(TextAlignment.CENTER)
+        //        .SetFontSize(18)
+        //        .SetBold();
 
-                i++;
-            });
+        //    doc.Add(header);
+        //    doc.Add(subheader);
 
-            doc.Add(new Paragraph(""));
-            doc.Add(new LineSeparator(new SolidLine(1f)));
-            doc.Close();
-        }
 
-        private void GerarPdfTeste()
-        {
-            if (txtLocalizacao.Text == "")
-            {
-                TelaPrincipalForm.Tela.AtualizarRodape($"Você deve informar a localização do diretório!");
-                DialogResult = DialogResult.None;
-                return;
-            }
+        //    doc.Add(new LineSeparator(new SolidLine(1f)));
+        //    doc.Add(new Paragraph(""));
 
-            PdfWriter localizacao = new PdfWriter(txtLocalizacao.Text + "\\" + teste.id + ".pdf");
-            PdfDocument pdf = new(localizacao);
-            Document doc = new(pdf);
+        //    int i = 1;
+        //    teste.questoes.ForEach(x =>
+        //    {
+        //        Paragraph questao = new Paragraph($"{i}) ")
+        //            .SetTextAlignment(TextAlignment.LEFT)
+        //            .SetFontSize(11)
+        //            .SetBold();
 
-            doc.Add(new LineSeparator(new SolidLine(1f)));
-            doc.Add(new Paragraph(""));
+        //        x.alternativas.Where(x => x.alternativaCorreta == AlternativaCorretaEnum.Correta).ToList().ForEach(a => questao.Add(new Text(a.idLetra + " " + a.texto)));
 
-            Paragraph info = new Paragraph("• Teste: " + teste.titulo)
-                .SetTextAlignment(TextAlignment.LEFT)
-                .SetFontSize(13);
+        //        doc.Add(questao);
 
-            string materia = "";
+        //        i++;
+        //    });
 
-            if (teste.materias.Count > 1)
-                materia = "Todas";
-            else
-                materia = teste.materias.FirstOrDefault(x => x == teste.materias[0]).titulo;
+        //    doc.Add(new Paragraph(""));
+        //    doc.Add(new LineSeparator(new SolidLine(1f)));
+        //    doc.Close();
+        //}
 
-            info.Add($"\n• Disciplina: {teste.disciplina}");
-            info.Add($"\n• Matéria: {materia}");
-            info.Add($"\n• Aluno(a): ");
+        //private void GerarPdfTeste()
+        //{
+        //    if (txtLocalizacao.Text == "")
+        //    {
+        //        TelaPrincipalForm.Tela.AtualizarRodape($"Você deve informar a localização do diretório!");
+        //        DialogResult = DialogResult.None;
+        //        return;
+        //    }
 
-            doc.Add(info);
-            doc.Add(new Paragraph(""));
-            doc.Add(new LineSeparator(new SolidLine(1f)));
-            doc.Add(new Paragraph("\n"));
+        //    PdfWriter localizacao = new PdfWriter(txtLocalizacao.Text + "\\" + teste.id + ".pdf");
+        //    PdfDocument pdf = new(localizacao);
+        //    Document doc = new(pdf);
 
-            Paragraph title = new Paragraph(teste.titulo)
-                .SetTextAlignment(TextAlignment.CENTER)
-                .SetFontSize(21)
-                .SetBold();
+        //    doc.Add(new LineSeparator(new SolidLine(1f)));
+        //    doc.Add(new Paragraph(""));
 
-            doc.Add(title);
-            doc.Add(new Paragraph("\n"));
+        //    Paragraph info = new Paragraph("• Teste: " + teste.titulo)
+        //        .SetTextAlignment(TextAlignment.LEFT)
+        //        .SetFontSize(13);
 
-            int i = 1;
-            teste.questoes.ForEach(x =>
-            {
-                Paragraph questao = new Paragraph($"{i}) {x.enunciado}")
-                    .SetTextAlignment(TextAlignment.LEFT)
-                    .SetFontSize(11)
-                    .SetBold();
+        //    string materia = "";
 
-                doc.Add(questao);
+        //    if (teste.materias.Count > 1)
+        //        materia = "Todas";
+        //    else
+        //        materia = teste.materias.FirstOrDefault(x => x == teste.materias[0]).titulo;
 
-                i++;
+        //    info.Add($"\n• Disciplina: {teste.disciplina}");
+        //    info.Add($"\n• Matéria: {materia}");
+        //    info.Add($"\n• Aluno(a): ");
 
-                x.alternativas.ForEach(a =>
-                {
-                    Paragraph alternativa = new Paragraph(a.idLetra + " " + a.texto)
-                        .SetTextAlignment(TextAlignment.LEFT)
-                        .SetFontSize(9);
+        //    doc.Add(info);
+        //    doc.Add(new Paragraph(""));
+        //    doc.Add(new LineSeparator(new SolidLine(1f)));
+        //    doc.Add(new Paragraph("\n"));
 
-                    doc.Add(alternativa);
-                });
+        //    Paragraph title = new Paragraph(teste.titulo)
+        //        .SetTextAlignment(TextAlignment.CENTER)
+        //        .SetFontSize(21)
+        //        .SetBold();
 
-                doc.Add(new Paragraph("\n"));
+        //    doc.Add(title);
+        //    doc.Add(new Paragraph("\n"));
 
-            });
+        //    int i = 1;
+        //    teste.questoes.ForEach(x =>
+        //    {
+        //        Paragraph questao = new Paragraph($"{i}) {x.enunciado}")
+        //            .SetTextAlignment(TextAlignment.LEFT)
+        //            .SetFontSize(11)
+        //            .SetBold();
 
-            doc.Close();
-        }
+        //        doc.Add(questao);
+
+        //        i++;
+
+        //        x.alternativas.ForEach(a =>
+        //        {
+        //            Paragraph alternativa = new Paragraph(a.idLetra + " " + a.texto)
+        //                .SetTextAlignment(TextAlignment.LEFT)
+        //                .SetFontSize(9);
+
+        //            doc.Add(alternativa);
+        //        });
+
+        //        doc.Add(new Paragraph("\n"));
+
+        //    });
+
+        //    doc.Close();
+        //}
 
         private void btnGerarPDF_Click(object sender, EventArgs e)
         {
-            if (txtLocalizacao.Text == "")
-            {
-                TelaPrincipalForm.Tela.AtualizarRodape($"Você deve informar a localização do diretório!");
-                DialogResult = DialogResult.None;
-                return;
-            }
-            if (!cbxTeste.Checked && !cbxGabarito.Checked)
-            {
-                TelaPrincipalForm.Tela.AtualizarRodape($"Você deve selecionar se gostaria do pdf do teste ou do gabarito!");
-                DialogResult = DialogResult.None;
-                return;
-            }
-            if (cbxTeste.Checked && !cbxGabarito.Checked)
-            {
-                GerarPdfTeste();
-            }
-            if (cbxGabarito.Checked && !cbxTeste.Checked)
-            {
-                GerarPdfGabarito();
-            }
-            if (cbxTeste.Checked && cbxGabarito.Checked)
-            {
-                GerarPdfTeste();
-                GerarPdfGabarito();
-            }
+            //    if (txtLocalizacao.Text == "")
+            //    {
+            //        TelaPrincipalForm.Tela.AtualizarRodape($"Você deve informar a localização do diretório!");
+            //        DialogResult = DialogResult.None;
+            //        return;
+            //    }
+            //    if (!cbxTeste.Checked && !cbxGabarito.Checked)
+            //    {
+            //        TelaPrincipalForm.Tela.AtualizarRodape($"Você deve selecionar se gostaria do pdf do teste ou do gabarito!");
+            //        DialogResult = DialogResult.None;
+            //        return;
+            //    }
+            //    if (cbxTeste.Checked && !cbxGabarito.Checked)
+            //    {
+            //        GerarPdfTeste();
+            //    }
+            //    if (cbxGabarito.Checked && !cbxTeste.Checked)
+            //    {
+            //        GerarPdfGabarito();
+            //    }
+            //    if (cbxTeste.Checked && cbxGabarito.Checked)
+            //    {
+            //        GerarPdfTeste();
+            //        GerarPdfGabarito();
+            //    }
 
-            MessageBox.Show("PDF gerado com sucesso!", "Gerar PDF", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    MessageBox.Show("PDF gerado com sucesso!", "Gerar PDF", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            return;
+            //    return;
         }
 
         private void btnLocalizar_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog folder = new();
+            //    FolderBrowserDialog folder = new();
 
-            if (folder.ShowDialog() == DialogResult.OK)
-                txtLocalizacao.Text = folder.SelectedPath;
+            //    if (folder.ShowDialog() == DialogResult.OK)
+            //        txtLocalizacao.Text = folder.SelectedPath;
 
-            DialogResult = DialogResult.None;
+            //    DialogResult = DialogResult.None;
         }
     }
 }

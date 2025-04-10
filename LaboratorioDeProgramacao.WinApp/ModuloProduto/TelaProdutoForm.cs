@@ -24,7 +24,7 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloProduto
         {
             int id = Convert.ToInt32(txtId.Text);
             string titulo = txtTitulo.Text;
-            float valor = float.Parse(txtValor.Text);
+            decimal valor = decimal.Parse(txtValor.Text);
             int quantidade = int.Parse(txtQuantidade.Text);
             Fornecedor fornecedor = cmbFornecedores.SelectedItem as Fornecedor;
 

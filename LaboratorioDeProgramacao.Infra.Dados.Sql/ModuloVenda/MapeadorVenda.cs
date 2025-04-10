@@ -20,7 +20,7 @@ namespace LaboratorioDeProgramacao.Infra.Dados.Sql.ModuloVenda
             DateTime data = Convert.ToDateTime(leitorRegistros["VENDA_DATA"]);
             string cpf = Convert.ToString(leitorRegistros["VENDA_CPF"]);
             string formaPagamento = Convert.ToString(leitorRegistros["VENDA_FORMA_PAGAMENTO"]);
-            float total = Convert.ToSingle(leitorRegistros["VENDA_TOTAL"]);
+            decimal total = Convert.ToDecimal(leitorRegistros["VENDA_TOTAL"]);
 
             return new Venda(id, data, cpf, formaPagamento, total);
         }

@@ -124,13 +124,6 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloFornecedor
 
         private bool ValidarFornecedor(Fornecedor fornecedor)
         {
-            if (string.IsNullOrWhiteSpace(fornecedor.nome) || fornecedor.nome.Length != 3)
-            {
-                MessageBox.Show("O nome do fornecedor deve conter exatamente 3 letras.",
-                    "Validação de Dados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-
             return true;
         }
     }

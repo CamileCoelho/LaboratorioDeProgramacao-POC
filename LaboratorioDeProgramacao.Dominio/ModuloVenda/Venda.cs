@@ -8,16 +8,27 @@ namespace LaboratorioDeProgramacao.Dominio.ModuloVenda
         public DateTime data { get; set; }
         public string cpf { get; set; }
         public string formaPagamento { get; set; }
-        public float total { get; set; }
+        public decimal total { get; set; }
 
         public List<ItemVenda> itens { get; set; }
 
         public Venda()
         {
             itens = new();
+            this.total = CalcularValorTotal();
         }
 
-        public Venda(int id, DateTime data, string cpf, string formaPagamento, float total)
+        public Venda(int id, DateTime data, string cpf, string formaPagamento)
+        {
+            this.id = id;
+            this.data = data;
+            this.cpf = cpf;
+            this.formaPagamento = formaPagamento;
+            this.total = CalcularValorTotal();
+            this.itens = new();
+        }
+
+        public Venda(int id, DateTime data, string cpf, string formaPagamento, decimal total)
         {
             this.id = id;
             this.data = data;
@@ -25,6 +36,11 @@ namespace LaboratorioDeProgramacao.Dominio.ModuloVenda
             this.formaPagamento = formaPagamento;
             this.total = total;
             this.itens = new();
+        }
+
+        private decimal CalcularValorTotal()
+        {
+            return itens?.Sum(i => i.CalcularValor()) ?? 0;
         }
 
         public override void AtualizarInformacoes(Venda registroAtualizado)

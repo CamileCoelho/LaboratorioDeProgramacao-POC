@@ -21,6 +21,11 @@ namespace LaboratorioDeProgramacao.Infra.Dados.Sql.ModuloItemVenda
             this.quantidade = quantidade;
         }
 
+        public decimal CalcularValor()
+        {
+            return produto.valorUnitario * quantidade;
+        }
+
         public override void AtualizarInformacoes(ItemVenda registroAtualizado)
         {
             produto = registroAtualizado.produto;

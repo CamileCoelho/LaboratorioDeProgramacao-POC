@@ -6,9 +6,9 @@ using LaboratorioDeProgramacao.Infra.Dados.Sql.ModuloItemVenda;
 using LaboratorioDeProgramacao.Infra.Dados.Sql.ModuloProduto;
 using LaboratorioDeProgramacao.Infra.Dados.Sql.ModuloVenda;
 using LaboratorioDeProgramacao.WinApp.Config;
+using LaboratorioDeProgramacao.WinApp.ModuloFornecedor;
 using LaboratorioDeProgramacao.WinApp.ModuloProduto;
-using LaboratorioDeProgramacao.WinApp.ModuloQuestao;
-using LaboratorioDeProgramacao.WinApp.ModuloTeste;
+using LaboratorioDeProgramacao.WinApp.ModuloVenda;
 using LaboratorioDeProgramacao.WinApp.Translation;
 
 namespace LaboratorioDeProgramacao.WinApp
@@ -60,7 +60,7 @@ namespace LaboratorioDeProgramacao.WinApp
 
         private void VendasMenuItem_Click(object sender, EventArgs e)
         {
-            controlador = new ControladorVenda(repositorioVenda, repositorioProduto, repositorioItemVenda);
+            controlador = new ControladorVenda(repositorioVenda, repositorioProduto);
 
             ConfigurarTelaPrincipal(controlador);
         }

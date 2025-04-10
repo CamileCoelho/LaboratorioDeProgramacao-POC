@@ -28,7 +28,7 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloVenda
             return colunas;
         }
 
-        public int ObterNumeroClienteSelecionado()
+        public int ObterNumeroVendaSelecionada()
         {
             return grid.SelecionarNumero<int>();
         }

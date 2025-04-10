@@ -6,7 +6,7 @@ namespace LaboratorioDeProgramacao.Dominio.ModuloProduto
     public class Produto : EntidadeBase<Produto>
     {
         public string titulo { get; set; }
-        public float valorUnitario { get; set; }
+        public decimal valorUnitario { get; set; }
         public int quantidade { get; set; }
         public Fornecedor fornecedor { get; set; }
 
@@ -15,7 +15,7 @@ namespace LaboratorioDeProgramacao.Dominio.ModuloProduto
 
         }
 
-        public Produto(int id, string titulo, float valorUnitario, int quantidade, Fornecedor fornecedor)
+        public Produto(int id, string titulo, decimal valorUnitario, int quantidade, Fornecedor fornecedor)
         {
             this.id = id;
             this.titulo = titulo;
@@ -32,18 +32,6 @@ namespace LaboratorioDeProgramacao.Dominio.ModuloProduto
             fornecedor = registroAtualizado.fornecedor;
         }
 
-        //public override string Validar()
-        //{
-        //    Validador valida = new();
-
-        //    if (valida.ValidaString(titulo))
-        //        return $"Você deve escrever uma disciplina!";
-
-        //    if (titulo.Length <= 4)
-        //        return $"O nome da disciplina deve conter no mínimo 5 caracteres!";
-
-        //    return "";
-        //}
         public override string Validar()
         {
             if (string.IsNullOrWhiteSpace(titulo))

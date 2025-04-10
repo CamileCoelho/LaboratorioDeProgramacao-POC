@@ -1,269 +1,183 @@
 ﻿using LaboratorioDeProgramacao.Dominio.ModuloProduto;
+using LaboratorioDeProgramacao.Dominio.ModuloVenda;
+using LaboratorioDeProgramacao.Infra.Dados.Sql.ModuloItemVenda;
 
 namespace LaboratorioDeProgramacao.WinApp.ModuloVenda
 {
     public partial class TelaVendaForm : Form
     {
-        Questao questao { get; set; }
-        List<Questao> questoes { get; set; }
-        Questao questaoSelecionada { get; set; }
-        List<Alternativa> alternativasParaRemover { get; set; }
-        List<Alternativa> alternativasParaAdicionar { get; set; }
-        TabelaItensControl tabelaAlternativas { get; set; }
-        List<Alternativa> alternativas { get { return alternativasParaAdicionar.Except(alternativasParaRemover).ToList(); } }
+        private List<Produto> produtos;
+        private List<ItemVenda> itensAdicionados = new();
+        private int contadorIds = 1;
+        private Venda venda;
 
-        Dictionary<int, string> meuDicionario { get; set; }
+        private readonly Dictionary<FormaPagamento, string> formasPagamentoExibicao;
 
-        public TelaVendaForm(List<Questao> questoes, List<Produto> disciplinas)
+        public TelaVendaForm(List<Produto> produtos)
         {
             InitializeComponent();
 
-            this.ConfigurarDialog();
+            this.produtos = produtos;
 
-            CarregarDisciplinas(disciplinas);
-
-            this.questao = new();
-            this.questoes = questoes;
-
-            if (tabelaAlternativas == null)
-                tabelaAlternativas = new();
-
-            alternativasParaAdicionar = new();
-            alternativasParaRemover = new();
-
-            panelAlternativas.Controls.Clear();
-
-            panelAlternativas.Controls.Add(tabelaAlternativas);
-
-            meuDicionario = new()
+            formasPagamentoExibicao = new()
             {
-                { 1, "a." },
-                { 2, "b." },
-                { 3, "c." },
-                { 4, "d." },
-                { 5, "e." }
+                { FormaPagamento.Dinheiro, TelaPrincipalForm.servicoDeTraducao.ObterTexto("Money") },
+                { FormaPagamento.CartaoCredito, TelaPrincipalForm.servicoDeTraducao.ObterTexto("CreditCard") },
+                { FormaPagamento.CartaoDebito, TelaPrincipalForm.servicoDeTraducao.ObterTexto("DebitCard") },
+                { FormaPagamento.Pix, TelaPrincipalForm.servicoDeTraducao.ObterTexto("Pix") },
+                { FormaPagamento.Boleto, TelaPrincipalForm.servicoDeTraducao.ObterTexto("BankSlip") }
             };
+
+            CarregarFormasPagamento();
+            CarregarProdutos();
+            InicializarTabela();
+            ConfigurarTextos();
         }
 
-        public Questao ObterQuestao()
+        private void CarregarProdutos()
         {
-            int id = Convert.ToInt32(txtId.Text);
+            cmbItens.Items.Clear();
 
-            Produto disciplina = (Produto)cmbDisciplina.SelectedItem;
-
-            Materia materia = (Materia)cmbMaterias.SelectedItem;
-
-            string enunciado = txtEnunciado.Text.Trim();
-
-            Alternativa alternativaCorreta = (Alternativa)cmbAlternativas.SelectedItem;
-
-            List<Alternativa> alternativas = this.alternativas;
-
-            return new(id, disciplina, materia, enunciado, alternativaCorreta, alternativas);
+            foreach (var produto in produtos)
+                cmbItens.Items.Add(produto);
         }
 
-        public void ConfigurarTelaEdicao(Questao questaoSelecionada)
+        private void InicializarTabela()
         {
-            this.questaoSelecionada = questaoSelecionada;
+            TabelaItensControl tabela = new();
+            tabela.Dock = DockStyle.Fill;
+            panelAlternativas.Controls.Add(tabela);
+            panelAlternativas.Tag = tabela;
+        }
 
-            this.alternativasParaAdicionar = questaoSelecionada.alternativas;
+        private TabelaItensControl ObterTabela()
+        {
+            return panelAlternativas.Controls.OfType<TabelaItensControl>().FirstOrDefault();
+        }
 
-            CarregarAlternativas(alternativasParaAdicionar);
+        private void CarregarFormasPagamento()
+        {
+            cmbFormaPagamento.Items.Clear();
 
-            btnRemover.Enabled = true;
+            foreach (var item in formasPagamentoExibicao)
+                cmbFormaPagamento.Items.Add(item.Value);
 
-            cmbAlternativas.Enabled = true;
-
-            txtId.Text = questaoSelecionada.id.ToString().Trim();
-            cmbDisciplina.SelectedItem = questaoSelecionada.disciplina;
-            cmbMaterias.SelectedItem = questaoSelecionada.materia;
-            txtEnunciado.Text = questaoSelecionada.enunciado.ToString().Trim();
-            tabelaAlternativas.AtualizarRegistros(questaoSelecionada.alternativas);
-            cmbAlternativas.SelectedItem = questaoSelecionada.alternativaCorreta;
+            cmbFormaPagamento.SelectedIndex = 0;
         }
 
         private void btnAdicionar_Click(object sender, EventArgs e)
         {
-            if (questao.alternativas == null && questaoSelecionada.alternativas == null)
-                questao.alternativas = new();
-
-            questao = ObterQuestao();
-
-            alternativasParaAdicionar = questao.alternativas;
-
-            string status = "";
-
-            string texto = txtAlternativa.Text.Trim();
-
-            Alternativa alternativa = new(texto);
-
-            status = questao.ValidarParaAdicionar();
-
-            TelaPrincipalForm.Tela.AtualizarRodape(status);
-
-            if (status != "")
+            if (cmbItens.SelectedItem is not Produto produtoSelecionado)
+            {
+                MessageBox.Show(
+                    TelaPrincipalForm.servicoDeTraducao.ObterTexto("SelectProductWarning"),
+                    TelaPrincipalForm.servicoDeTraducao.ObterTexto("Warning"),
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
+            }
 
-            status = alternativa.Validar();
-
-            if (alternativasParaAdicionar.Any(x => x.texto == texto))
-                status = $"Você não pode adicionar a mesma alternativa mais de uma vez!";
-
-            if (alternativasParaAdicionar.Count >= 5)
-                status = $"Você não pode adicionar mais de cinco alternativas por questão!";
-
-            TelaPrincipalForm.Tela.AtualizarRodape(status);
-
-            if (status != "")
+            if (!int.TryParse(txtQuantidade.Text, out int quantidade) || quantidade <= 0)
+            {
+                MessageBox.Show(
+                    TelaPrincipalForm.servicoDeTraducao.ObterTexto("InvalidQuantityWarning"),
+                    TelaPrincipalForm.servicoDeTraducao.ObterTexto("Warning"),
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
+            }
 
-            alternativasParaAdicionar.Add(alternativa);
+            var item = new ItemVenda(contadorIds++, produtoSelecionado, quantidade);
+            itensAdicionados.Add(item);
 
-            AtualizarAlternativas(alternativas);
-
-            tabelaAlternativas.AtualizarRegistros(alternativas);
-
-            txtAlternativa.Text = "";
-
-            cmbAlternativas.Enabled = true;
-
-            CarregarAlternativas(alternativas);
-
-            questao.alternativas = alternativas;
+            AtualizarTabela();
         }
 
         private void btnRemover_Click(object sender, EventArgs e)
         {
-            int id = tabelaAlternativas.ObterNumeroAlternativaSelecionada();
+            var tabela = ObterTabela();
+            int idSelecionado = tabela.ObterNumeroItemSelecionado();
 
-            Alternativa alternativa = alternativasParaAdicionar.FirstOrDefault(x => x.id == id);
+            var item = itensAdicionados.FirstOrDefault(i => i.id == idSelecionado);
 
-            string status = "";
+            if (item != null)
+            {
+                itensAdicionados.Remove(item);
+                AtualizarTabela();
+            }
+        }
 
-            if (alternativas.Count() == 0)
-                status = $"Você deve adicionar uma alternativa primeiro!";
+        private void AtualizarTabela()
+        {
+            var tabela = ObterTabela();
+            tabela.AtualizarRegistros(itensAdicionados);
+        }
 
-            if (id == 0)
-                status = $"Você deve selecionar uma alternativa primeiro!";
+        private void ConfigurarTextos()
+        {
+            lblItem.Text = TelaPrincipalForm.servicoDeTraducao.ObterTexto("Product");
+            lblQuantidade.Text = TelaPrincipalForm.servicoDeTraducao.ObterTexto("Quantity");
+            lblFormaPgto.Text = TelaPrincipalForm.servicoDeTraducao.ObterTexto("PaymentMethod");
+            lblCpf.Text = TelaPrincipalForm.servicoDeTraducao.ObterTexto("CPF");
+            lblData.Text = TelaPrincipalForm.servicoDeTraducao.ObterTexto("Date");
+            btnAdicionar.Text = TelaPrincipalForm.servicoDeTraducao.ObterTexto("Add");
+            btnRemover.Text = TelaPrincipalForm.servicoDeTraducao.ObterTexto("Remove");
+            btnGravar.Text = TelaPrincipalForm.servicoDeTraducao.ObterTexto("Save");
+            btnCancelar.Text = TelaPrincipalForm.servicoDeTraducao.ObterTexto("Cancel");
+        }
 
-            TelaPrincipalForm.Tela.AtualizarRodape(status);
+        internal Venda ObterVenda()
+        {
+            string cpf = txtCpf.Text;
+            DateTime data = dateTimePicker.Value;
+            string formaSelecionada = cmbFormaPagamento.SelectedItem?.ToString() ?? "";
 
-            alternativasParaRemover.Add(alternativa);
+            FormaPagamento formaPagamento = formasPagamentoExibicao
+                .FirstOrDefault(x => x.Value == formaSelecionada).Key;
 
-            AtualizarAlternativas(alternativas);
+            return new Venda
+            {
+                cpf = cpf,
+                formaPagamento = formaPagamento.ToString(),
+                data = data,
+                itens = itensAdicionados
+            };
+        }
 
-            tabelaAlternativas.AtualizarRegistros(alternativas);
+        public void ConfigurarTelaEdicao(Venda venda)
+        {
+            txtCpf.Text = venda.cpf;
+            dateTimePicker.Value = venda.data;
 
-            CarregarAlternativas(alternativas);
+            this.venda = venda;
+
+            if (Enum.TryParse<FormaPagamento>(venda.formaPagamento, out var forma))
+            {
+                string descricao = formasPagamentoExibicao[forma];
+                cmbFormaPagamento.SelectedItem = descricao;
+            }
+
+            itensAdicionados = venda.itens ?? new List<ItemVenda>();
+            AtualizarTabela();
         }
 
         private void btnGravar_Click(object sender, EventArgs e)
         {
-            questao = ObterQuestao();
-
-            string status = "";
-
-            if (questoes.Where(i => questao.id != questaoSelecionada?.id).Any(x => x.enunciado == questao.enunciado))
-                status = $"Já existe uma questão cadastrada com esse enunciado!";
-            else
-                status = questao.Validar();
-
-            if (questao.alternativas.All(x => x.alternativaCorreta == AlternativaCorretaEnum.Errada))
-                status = $"Voce deve selecionar uma alternativa como correta!";
-
-            TelaPrincipalForm.Tela.AtualizarRodape(status);
-
-            questao.alternativas = alternativas;
-
-            if (status != "")
+            if (itensAdicionados.Count == 0)
             {
+                MessageBox.Show(
+                    TelaPrincipalForm.servicoDeTraducao.ObterTexto("AddAtLeastOneItemWarning"),
+                    TelaPrincipalForm.servicoDeTraducao.ObterTexto("Warning"),
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 DialogResult = DialogResult.None;
                 return;
             }
 
-            return;
-        }
+            venda = ObterVenda();
+            string validacao = venda.Validar();
 
-        private void CarregarDisciplinas(List<Produto> disciplinas)
-        {
-            cmbDisciplina.Items.Clear();
+            TelaPrincipalForm.Tela.AtualizarRodape(validacao);
 
-            foreach (Produto disciplina in disciplinas)
-            {
-                cmbDisciplina.Items.Add(disciplina);
-            }
-        }
-
-        private void CarregarAlternativas(List<Alternativa> alternativas)
-        {
-            cmbAlternativas.Items.Clear();
-
-            foreach (Alternativa alternativa in alternativas)
-            {
-                cmbAlternativas.Items.Add(alternativa);
-            }
-        }
-
-        private void CarregarMaterias(List<Materia> materias)
-        {
-            cmbMaterias.Items.Clear();
-
-            foreach (Materia materia in materias)
-            {
-                cmbMaterias.Items.Add(materia);
-            }
-        }
-
-        private void cmbDisciplina_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if ((Produto)cmbDisciplina.SelectedItem != null)
-            {
-                cmbMaterias.Enabled = true;
-            }
-
-            CarregarMaterias(((Produto)cmbDisciplina.SelectedItem).materias);
-        }
-
-        private void cmbAlternativas_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (VerificarSeExisteAlternativaCorreta())
-            {
-                foreach (Alternativa a in this.alternativas)
-                {
-                    a.alternativaCorreta = AlternativaCorretaEnum.Errada;
-                }
-            }
-
-            ((Alternativa)cmbAlternativas.SelectedItem).alternativaCorreta = AlternativaCorretaEnum.Correta;
-
-            tabelaAlternativas.AtualizarRegistros(this.alternativas);
-        }
-
-        private bool VerificarSeExisteAlternativaCorreta()
-        {
-            return this.alternativas.Any(x => x.alternativaCorreta == AlternativaCorretaEnum.Correta);
-        }
-
-        private void txtAlternativa_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            btnAdicionar.Enabled = true;
-            btnRemover.Enabled = true;
-        }
-
-        public void AtualizarAlternativas(List<Alternativa> alternativasParaAtualizar)
-        {
-            var contador = 0;
-            foreach (var alternativa in alternativasParaAtualizar)
-            {
-                contador = contador + 1;
-                alternativa.id = contador;
-                alternativa.idLetra = meuDicionario[alternativa.id];
-            }
-        }
-
-        private void cmbMaterias_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            if (!string.IsNullOrEmpty(validacao))
+                DialogResult = DialogResult.None;
         }
     }
 }

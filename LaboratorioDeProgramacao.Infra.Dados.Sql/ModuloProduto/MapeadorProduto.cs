@@ -19,7 +19,7 @@ namespace LaboratorioDeProgramacao.Infra.Dados.Sql.ModuloProduto
         {
             int id = Convert.ToInt32(leitorRegistros["PRODUTO_ID"]);
             string titulo = Convert.ToString(leitorRegistros["PRODUTO_TITULO"]);
-            float valorUnitario = Convert.ToSingle(leitorRegistros["PRODUTO_VALOR_UNITARIO"]);
+            decimal valorUnitario = Convert.ToDecimal(leitorRegistros["PRODUTO_VALOR_UNITARIO"]);
             int quantidade = Convert.ToInt32(leitorRegistros["PRODUTO_QUANTIDADE"]);
 
             int idFornecedor = Convert.ToInt32(leitorRegistros["FORNECEDOR_ID"]);
