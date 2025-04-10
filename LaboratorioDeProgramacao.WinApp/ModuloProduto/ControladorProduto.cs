@@ -1,8 +1,6 @@
 ﻿using LaboratorioDeProgramacao.Dominio.ModuloFornecedor;
 using LaboratorioDeProgramacao.Dominio.ModuloProduto;
 using LaboratorioDeProgramacao.Dominio.ModuloVenda;
-using LaboratorioDeProgramacao.WinApp.ModuloDiciplina;
-using LaboratorioDeProgramacao.WinApp.ModuloDisciplina;
 
 namespace LaboratorioDeProgramacao.WinApp.ModuloProduto
 {

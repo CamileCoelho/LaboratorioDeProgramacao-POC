@@ -1,11 +1,10 @@
-﻿using LaboratorioDeProgramacao.Dominio.ModuloQuestao;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+﻿using LaboratorioDeProgramacao.Dominio.ModuloVenda;
 
-namespace LaboratorioDeProgramacao.WinApp.ModuloQuestao
+namespace LaboratorioDeProgramacao.WinApp.ModuloVenda
 {
-    public partial class TabelaQuestaoControl : UserControl
+    public partial class TabelaVendaControl : UserControl
     {
-        public TabelaQuestaoControl()
+        public TabelaVendaControl()
         {
             InitializeComponent(); 
             grid.ConfigurarGridZebrado();
@@ -21,9 +20,9 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloQuestao
             {
                 new DataGridViewTextBoxColumn { DataPropertyName = "Id", HeaderText = "Id"},
 
-                new DataGridViewTextBoxColumn { DataPropertyName = "Materia", HeaderText = "Materia"},
+                new DataGridViewTextBoxColumn { DataPropertyName = "Cpf", HeaderText = "Cpf"},
 
-                new DataGridViewTextBoxColumn { DataPropertyName = "Enunciado", HeaderText = "Enunciado"}
+                new DataGridViewTextBoxColumn { DataPropertyName = "FormaDePagamento", HeaderText = "Forma de pagamento"}
             };
 
             return colunas;
@@ -34,14 +33,13 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloQuestao
             return grid.SelecionarNumero<int>();
         }
 
-        public void AtualizarRegistros(List<Questao> questoes)
+        public void AtualizarRegistros(List<Venda> vendas)
         {
             grid.Rows.Clear();
 
-            foreach (var questao in questoes)
+            foreach (var venda in vendas)
             {
-                grid.Rows.Add(questao.id, questao.materia,
-                    questao.enunciado.Substring(0, 14));
+                grid.Rows.Add(venda.id, venda.cpf, venda.formaPagamento);
             }
         }
     }

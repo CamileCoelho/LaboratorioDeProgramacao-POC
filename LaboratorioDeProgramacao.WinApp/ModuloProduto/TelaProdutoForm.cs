@@ -1,7 +1,7 @@
 ﻿using LaboratorioDeProgramacao.Dominio.ModuloFornecedor;
 using LaboratorioDeProgramacao.Dominio.ModuloProduto;
 
-namespace LaboratorioDeProgramacao.WinApp.ModuloDisciplina
+namespace LaboratorioDeProgramacao.WinApp.ModuloProduto
 {
     public partial class TelaProdutoForm : Form
     {

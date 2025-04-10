@@ -1,6 +1,6 @@
-﻿namespace LaboratorioDeProgramacao.WinApp.ModuloQuestao
+﻿namespace LaboratorioDeProgramacao.WinApp.ModuloFornecedor
 {
-    partial class TabelaQuestaoControl
+    partial class TabelaFornecedorControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -39,16 +39,16 @@
             grid.Location = new Point(0, 0);
             grid.Name = "grid";
             grid.RowTemplate.Height = 25;
-            grid.Size = new Size(558, 423);
+            grid.Size = new Size(784, 480);
             grid.TabIndex = 1;
             // 
-            // TabelaQuestaoControl
+            // TabelaDisciplinaControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(grid);
-            Name = "TabelaQuestaoControl";
-            Size = new Size(558, 423);
+            Name = "TabelaDisciplinaControl";
+            Size = new Size(784, 480);
             ((System.ComponentModel.ISupportInitialize)grid).EndInit();
             ResumeLayout(false);
         }

@@ -11,6 +11,7 @@ namespace LaboratorioDeProgramacao.Infra.Dados.Sql.ModuloItemVenda
 
         public ItemVenda()
         {
+
         }
 
         public ItemVenda(int id, Produto produto, int quantidade)

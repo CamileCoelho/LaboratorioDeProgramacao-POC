@@ -8,11 +8,11 @@ using LaboratorioDeProgramacao.Dominio.ModuloTeste;
 
 namespace LaboratorioDeProgramacao.WinApp.ModuloTeste
 {
-    public partial class TelaGerarPdfTesteForm : Form
+    public partial class TelaGerarPdfForm : Form
     {
         private Teste teste { get; set; }
 
-        public TelaGerarPdfTesteForm(Teste teste)
+        public TelaGerarPdfForm(Teste teste)
         {
             InitializeComponent();
 
@@ -42,7 +42,7 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloTeste
 
             Paragraph header = new Paragraph("Gabarito do teste:")
                 .SetTextAlignment(TextAlignment.CENTER)
-                .SetFontSize(21);     
+                .SetFontSize(21);
 
             Paragraph subheader = new Paragraph(teste.titulo)
                 .SetTextAlignment(TextAlignment.CENTER)
@@ -177,7 +177,7 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloTeste
             }
 
             MessageBox.Show("PDF gerado com sucesso!", "Gerar PDF", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        
+
             return;
         }
 

@@ -18,12 +18,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="ModuloQuestao\TabelaAlternativasControl.cs" />
-    <Compile Update="ModuloQuestao\TabelaQuestaoControl.cs">
+    <Compile Update="ModuloVenda\TabelaVendaControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="ModuloTeste\TabelaQuestoesTesteControl.cs">
+    <Compile Update="ModuloFornecedor\TabelaFornecedorControl.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="ModuloFornecedor\TelaFornecedorForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -46,8 +48,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ModuloVenda\" />
-    <Folder Include="ModuloFornecedor\" />
+    <Folder Include="ModuloQuestao\" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 ﻿using LaboratorioDeProgramacao.Dominio.ModuloProduto;
 
-namespace LaboratorioDeProgramacao.WinApp.ModuloDiciplina
+namespace LaboratorioDeProgramacao.WinApp.ModuloProduto
 {
     public partial class TabelaProdutoControl : UserControl
     {

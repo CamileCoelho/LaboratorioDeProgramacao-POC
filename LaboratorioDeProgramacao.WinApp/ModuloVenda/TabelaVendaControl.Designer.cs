@@ -1,6 +1,6 @@
-﻿namespace LaboratorioDeProgramacao.WinApp.ModuloQuestao
+﻿namespace LaboratorioDeProgramacao.WinApp.ModuloVenda
 {
-    partial class TabelaAlternativasControl
+    partial class TabelaVendaControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,36 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            gridAlternativas = new DataGridView();
-            ((System.ComponentModel.ISupportInitialize)gridAlternativas).BeginInit();
+            grid = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)grid).BeginInit();
             SuspendLayout();
             // 
-            // gridQuestoesTeste
+            // grid
             // 
-            gridAlternativas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gridAlternativas.Dock = DockStyle.Fill;
-            gridAlternativas.Location = new Point(0, 0);
-            gridAlternativas.Name = "gridQuestoesTeste";
-            gridAlternativas.RowTemplate.Height = 25;
-            gridAlternativas.Size = new Size(395, 182);
-            gridAlternativas.TabIndex = 1;
+            grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            grid.Dock = DockStyle.Fill;
+            grid.Location = new Point(0, 0);
+            grid.Name = "grid";
+            grid.RowTemplate.Height = 25;
+            grid.Size = new Size(558, 423);
+            grid.TabIndex = 1;
             // 
-            // TabelaAlternativasControl
+            // TabelaQuestaoControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            AutoSize = true;
-            Controls.Add(gridAlternativas);
-            MaximumSize = new Size(395, 182);
-            MinimumSize = new Size(395, 182);
-            Name = "TabelaAlternativasControl";
-            Size = new Size(395, 182);
-            ((System.ComponentModel.ISupportInitialize)gridAlternativas).EndInit();
+            Controls.Add(grid);
+            Name = "TabelaQuestaoControl";
+            Size = new Size(558, 423);
+            ((System.ComponentModel.ISupportInitialize)grid).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private DataGridView gridAlternativas;
+        private DataGridView grid;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace LaboratorioDeProgramacao.WinApp.ModuloTeste
 {
-    partial class TelaGerarPdfTesteForm
+    partial class TelaGerarPdfForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,9 +29,7 @@
         private void InitializeComponent()
         {
             txtTitulo = new TextBox();
-            label2 = new Label();
-            cbxGabarito = new CheckBox();
-            cbxTeste = new CheckBox();
+            lblTitulo = new Label();
             txtLocalizacao = new TextBox();
             label1 = new Label();
             btnCancelar = new Button();
@@ -42,59 +40,39 @@
             // txtTitulo
             // 
             txtTitulo.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtTitulo.Location = new Point(184, 19);
+            txtTitulo.Location = new Point(229, 25);
+            txtTitulo.Margin = new Padding(3, 4, 3, 4);
             txtTitulo.Name = "txtTitulo";
             txtTitulo.ReadOnly = true;
-            txtTitulo.Size = new Size(344, 29);
+            txtTitulo.Size = new Size(544, 34);
             txtTitulo.TabIndex = 84;
             // 
-            // label2
+            // lblTitulo
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(67, 19);
-            label2.Name = "label2";
-            label2.Size = new Size(111, 21);
-            label2.TabIndex = 83;
-            label2.Text = "Título do teste:";
-            // 
-            // cbxGabarito
-            // 
-            cbxGabarito.AutoSize = true;
-            cbxGabarito.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            cbxGabarito.Location = new Point(184, 146);
-            cbxGabarito.Name = "cbxGabarito";
-            cbxGabarito.Size = new Size(89, 25);
-            cbxGabarito.TabIndex = 82;
-            cbxGabarito.Text = "Gabarito";
-            cbxGabarito.UseVisualStyleBackColor = true;
-            // 
-            // cbxTeste
-            // 
-            cbxTeste.AutoSize = true;
-            cbxTeste.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            cbxTeste.Location = new Point(184, 109);
-            cbxTeste.Name = "cbxTeste";
-            cbxTeste.Size = new Size(63, 25);
-            cbxTeste.TabIndex = 81;
-            cbxTeste.Text = "Teste";
-            cbxTeste.UseVisualStyleBackColor = true;
+            lblTitulo.AutoSize = true;
+            lblTitulo.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblTitulo.Location = new Point(157, 31);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(66, 28);
+            lblTitulo.TabIndex = 83;
+            lblTitulo.Text = "Título:";
             // 
             // txtLocalizacao
             // 
             txtLocalizacao.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtLocalizacao.Location = new Point(184, 65);
+            txtLocalizacao.Location = new Point(229, 87);
+            txtLocalizacao.Margin = new Padding(3, 4, 3, 4);
             txtLocalizacao.Name = "txtLocalizacao";
-            txtLocalizacao.Size = new Size(228, 29);
+            txtLocalizacao.Size = new Size(411, 34);
             txtLocalizacao.TabIndex = 86;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(24, 65);
+            label1.Location = new Point(27, 87);
             label1.Name = "label1";
-            label1.Size = new Size(154, 21);
+            label1.Size = new Size(196, 28);
             label1.TabIndex = 85;
             label1.Text = "Diretório do arquivo:";
             // 
@@ -104,10 +82,10 @@
             btnCancelar.DialogResult = DialogResult.Cancel;
             btnCancelar.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnCancelar.ImageAlign = ContentAlignment.BottomRight;
-            btnCancelar.Location = new Point(425, 196);
-            btnCancelar.Margin = new Padding(4);
+            btnCancelar.Location = new Point(655, 158);
+            btnCancelar.Margin = new Padding(5);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(103, 34);
+            btnCancelar.Size = new Size(118, 57);
             btnCancelar.TabIndex = 94;
             btnCancelar.Text = "Cancelar";
             btnCancelar.TextImageRelation = TextImageRelation.TextAboveImage;
@@ -119,10 +97,10 @@
             btnGerarPDF.DialogResult = DialogResult.OK;
             btnGerarPDF.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnGerarPDF.ImageAlign = ContentAlignment.BottomRight;
-            btnGerarPDF.Location = new Point(309, 196);
-            btnGerarPDF.Margin = new Padding(4);
+            btnGerarPDF.Location = new Point(522, 158);
+            btnGerarPDF.Margin = new Padding(5);
             btnGerarPDF.Name = "btnGerarPDF";
-            btnGerarPDF.Size = new Size(103, 34);
+            btnGerarPDF.Size = new Size(118, 57);
             btnGerarPDF.TabIndex = 93;
             btnGerarPDF.Text = "Gerar PDF";
             btnGerarPDF.TextImageRelation = TextImageRelation.TextAboveImage;
@@ -135,32 +113,31 @@
             btnLocalizar.DialogResult = DialogResult.Cancel;
             btnLocalizar.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnLocalizar.ImageAlign = ContentAlignment.BottomRight;
-            btnLocalizar.Location = new Point(425, 65);
-            btnLocalizar.Margin = new Padding(4);
+            btnLocalizar.Location = new Point(655, 85);
+            btnLocalizar.Margin = new Padding(5);
             btnLocalizar.Name = "btnLocalizar";
-            btnLocalizar.Size = new Size(103, 29);
+            btnLocalizar.Size = new Size(118, 39);
             btnLocalizar.TabIndex = 95;
             btnLocalizar.Text = "Localizar";
             btnLocalizar.TextImageRelation = TextImageRelation.TextAboveImage;
             btnLocalizar.UseVisualStyleBackColor = true;
             btnLocalizar.Click += btnLocalizar_Click;
             // 
-            // TelaGerarPdfTesteForm
+            // TelaGerarPdfForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(561, 263);
+            ClientSize = new Size(810, 248);
             Controls.Add(btnLocalizar);
             Controls.Add(btnCancelar);
             Controls.Add(btnGerarPDF);
             Controls.Add(txtLocalizacao);
             Controls.Add(label1);
             Controls.Add(txtTitulo);
-            Controls.Add(label2);
-            Controls.Add(cbxGabarito);
-            Controls.Add(cbxTeste);
-            Name = "TelaGerarPdfTesteForm";
-            Text = "TelaGerarPdfTesteForm";
+            Controls.Add(lblTitulo);
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "TelaGerarPdfForm";
+            Text = "Gerador de PDF";
             ResumeLayout(false);
             PerformLayout();
         }
@@ -168,9 +145,7 @@
         #endregion
 
         private TextBox txtTitulo;
-        private Label label2;
-        private CheckBox cbxGabarito;
-        private CheckBox cbxTeste;
+        private Label lblTitulo;
         private TextBox txtLocalizacao;
         private Label label1;
         private Button btnCancelar;

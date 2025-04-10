@@ -1,24 +1,20 @@
-﻿using LaboratorioDeProgramacao.Dominio.ModuloFornecedor;
-using LaboratorioDeProgramacao.Dominio.ModuloMateria;
-using LaboratorioDeProgramacao.Dominio.ModuloProduto;
-using LaboratorioDeProgramacao.Dominio.ModuloQuestao;
-using LaboratorioDeProgramacao.Dominio.ModuloVenda;
+﻿using LaboratorioDeProgramacao.Dominio.ModuloProduto;
 
-namespace LaboratorioDeProgramacao.WinApp.ModuloQuestao
+namespace LaboratorioDeProgramacao.WinApp.ModuloVenda
 {
-    public partial class TelaQuestaoForm : Form
+    public partial class TelaVendaForm : Form
     {
         Questao questao { get; set; }
         List<Questao> questoes { get; set; }
         Questao questaoSelecionada { get; set; }
         List<Alternativa> alternativasParaRemover { get; set; }
         List<Alternativa> alternativasParaAdicionar { get; set; }
-        TabelaAlternativasControl tabelaAlternativas { get; set; }
+        TabelaItensControl tabelaAlternativas { get; set; }
         List<Alternativa> alternativas { get { return alternativasParaAdicionar.Except(alternativasParaRemover).ToList(); } }
 
         Dictionary<int, string> meuDicionario { get; set; }
 
-        public TelaQuestaoForm(List<Questao> questoes, List<Produto> disciplinas)
+        public TelaVendaForm(List<Questao> questoes, List<Produto> disciplinas)
         {
             InitializeComponent();
 
@@ -263,6 +259,11 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloQuestao
                 alternativa.id = contador;
                 alternativa.idLetra = meuDicionario[alternativa.id];
             }
+        }
+
+        private void cmbMaterias_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

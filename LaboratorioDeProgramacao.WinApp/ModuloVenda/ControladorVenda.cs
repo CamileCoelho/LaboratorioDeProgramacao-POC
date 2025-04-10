@@ -1,15 +1,15 @@
 ﻿using LaboratorioDeProgramacao.Dominio.ModuloProduto;
 
-namespace LaboratorioDeProgramacao.WinApp.ModuloQuestao
+namespace LaboratorioDeProgramacao.WinApp.ModuloVenda
 {
-    public class ControladorQuestao : ControladorBase
+    public class ControladorVenda : ControladorBase
     {
         private IRepositorioTeste repositorioTeste;
         private IRepositorioQuestao repositorioQuestao;
         private IRepositorioProduto repositorioDisciplina;
-        private TabelaQuestaoControl tabelaQuestao;
+        private TabelaVendaControl tabelaQuestao;
 
-        public ControladorQuestao(IRepositorioQuestao repositorioQuestao, IRepositorioProduto repositorioDisciplina, IRepositorioTeste repositorioTeste)
+        public ControladorVenda(IRepositorioQuestao repositorioQuestao, IRepositorioProduto repositorioDisciplina, IRepositorioTeste repositorioTeste)
         {
             this.repositorioTeste = repositorioTeste;
             this.repositorioQuestao = repositorioQuestao;
@@ -29,7 +29,7 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloQuestao
 
         public override void Inserir()
         {
-            TelaQuestaoForm tela = new(repositorioQuestao.SelecionarTodos(), repositorioDisciplina.SelecionarTodos());
+            TelaVendaForm tela = new(repositorioQuestao.SelecionarTodos(), repositorioDisciplina.SelecionarTodos());
 
             if (tela.ShowDialog() == DialogResult.OK)
             {
@@ -70,7 +70,7 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloQuestao
                 return;
             }
 
-            TelaQuestaoForm tela = new(repositorioQuestao.SelecionarTodos(), repositorioDisciplina.SelecionarTodos());
+            TelaVendaForm tela = new(repositorioQuestao.SelecionarTodos(), repositorioDisciplina.SelecionarTodos());
 
             tela.ConfigurarTelaEdicao(questaoSelecionada);
 
@@ -116,9 +116,9 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloQuestao
             }
 
             DialogResult opcaoEscolhida = MessageBox.Show(
-                $"Deseja excluir o questao {questaoSelecionada.id}?", 
+                $"Deseja excluir o questao {questaoSelecionada.id}?",
                 "Exclusão de Questóes",
-                MessageBoxButtons.OKCancel, 
+                MessageBoxButtons.OKCancel,
                 MessageBoxIcon.Question);
 
             if (opcaoEscolhida == DialogResult.OK)
@@ -148,7 +148,7 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloQuestao
         public override UserControl ObterListagem()
         {
             if (tabelaQuestao == null)
-                tabelaQuestao = new TabelaQuestaoControl();
+                tabelaQuestao = new TabelaVendaControl();
 
             CarregarQuestoes();
 

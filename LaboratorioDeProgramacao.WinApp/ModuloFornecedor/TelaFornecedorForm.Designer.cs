@@ -1,6 +1,6 @@
-﻿namespace LaboratorioDeProgramacao.WinApp.ModuloProduto
+﻿namespace LaboratorioDeProgramacao.WinApp.ModuloFornecedor
 {
-    partial class TelaProdutoForm
+    partial class TelaFornecedorForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,47 +29,34 @@
         private void InitializeComponent()
         {
             txtTitulo = new TextBox();
-            labelFornecedor = new Label();
             txtId = new TextBox();
             lblId = new Label();
             btnCancelar = new Button();
             btnGravar = new Button();
-            cmbFornecedores = new ComboBox();
             lblTitulo = new Label();
-            lblValorUnitario = new Label();
+            lblEndereco = new Label();
             txtValor = new TextBox();
-            lblQuantidadeEstoque = new Label();
-            txtQuantidade = new TextBox();
+            lblNome = new Label();
             SuspendLayout();
             // 
             // txtTitulo
             // 
             txtTitulo.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtTitulo.Location = new Point(275, 132);
+            txtTitulo.Location = new Point(119, 88);
             txtTitulo.Margin = new Padding(3, 4, 3, 4);
             txtTitulo.Name = "txtTitulo";
-            txtTitulo.Size = new Size(500, 34);
+            txtTitulo.Size = new Size(738, 34);
             txtTitulo.TabIndex = 9;
-            // 
-            // labelFornecedor
-            // 
-            labelFornecedor.AutoSize = true;
-            labelFornecedor.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelFornecedor.Location = new Point(153, 84);
-            labelFornecedor.Name = "labelFornecedor";
-            labelFornecedor.Size = new Size(116, 28);
-            labelFornecedor.TabIndex = 7;
-            labelFornecedor.Text = "Fornecedor:";
             // 
             // txtId
             // 
             txtId.Enabled = false;
             txtId.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtId.Location = new Point(275, 30);
+            txtId.Location = new Point(119, 30);
             txtId.Margin = new Padding(3, 4, 3, 4);
             txtId.Name = "txtId";
             txtId.ReadOnly = true;
-            txtId.Size = new Size(500, 34);
+            txtId.Size = new Size(738, 34);
             txtId.TabIndex = 34;
             txtId.Text = "0";
             // 
@@ -77,7 +64,7 @@
             // 
             lblId.AutoSize = true;
             lblId.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblId.Location = new Point(238, 33);
+            lblId.Location = new Point(80, 30);
             lblId.Name = "lblId";
             lblId.Size = new Size(33, 28);
             lblId.TabIndex = 33;
@@ -89,7 +76,7 @@
             btnCancelar.DialogResult = DialogResult.Cancel;
             btnCancelar.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnCancelar.ImageAlign = ContentAlignment.BottomRight;
-            btnCancelar.Location = new Point(652, 314);
+            btnCancelar.Location = new Point(734, 219);
             btnCancelar.Margin = new Padding(5);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(123, 60);
@@ -104,7 +91,7 @@
             btnGravar.DialogResult = DialogResult.OK;
             btnGravar.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnGravar.ImageAlign = ContentAlignment.BottomRight;
-            btnGravar.Location = new Point(513, 314);
+            btnGravar.Location = new Point(595, 219);
             btnGravar.Margin = new Padding(5);
             btnGravar.Name = "btnGravar";
             btnGravar.Size = new Size(120, 60);
@@ -114,85 +101,58 @@
             btnGravar.UseVisualStyleBackColor = true;
             btnGravar.Click += btnGravar_Click;
             // 
-            // cmbFornecedores
-            // 
-            cmbFornecedores.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbFornecedores.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            cmbFornecedores.FormattingEnabled = true;
-            cmbFornecedores.Location = new Point(275, 81);
-            cmbFornecedores.Margin = new Padding(3, 4, 3, 4);
-            cmbFornecedores.Name = "cmbFornecedores";
-            cmbFornecedores.Size = new Size(500, 33);
-            cmbFornecedores.TabIndex = 86;
-            // 
             // lblTitulo
             // 
-            lblTitulo.AutoSize = true;
-            lblTitulo.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblTitulo.Location = new Point(203, 135);
+            lblTitulo.Location = new Point(0, 0);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(66, 28);
-            lblTitulo.TabIndex = 87;
-            lblTitulo.Text = "Titulo:";
+            lblTitulo.Size = new Size(100, 23);
+            lblTitulo.TabIndex = 0;
             // 
-            // lblValorUnitario
+            // lblEndereco
             // 
-            lblValorUnitario.AutoSize = true;
-            lblValorUnitario.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblValorUnitario.Location = new Point(96, 188);
-            lblValorUnitario.Name = "lblValorUnitario";
-            lblValorUnitario.Size = new Size(173, 28);
-            lblValorUnitario.TabIndex = 89;
-            lblValorUnitario.Text = "Valor por unidade:";
+            lblEndereco.AutoSize = true;
+            lblEndereco.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblEndereco.Location = new Point(16, 141);
+            lblEndereco.Name = "lblEndereco";
+            lblEndereco.Size = new Size(97, 28);
+            lblEndereco.TabIndex = 89;
+            lblEndereco.Text = "Endereço:";
             // 
             // txtValor
             // 
             txtValor.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtValor.Location = new Point(275, 185);
+            txtValor.Location = new Point(119, 141);
             txtValor.Margin = new Padding(3, 4, 3, 4);
             txtValor.Name = "txtValor";
-            txtValor.Size = new Size(500, 34);
+            txtValor.Size = new Size(738, 34);
             txtValor.TabIndex = 88;
             // 
-            // lblQuantidadeEstoque
+            // lblNome
             // 
-            lblQuantidadeEstoque.AutoSize = true;
-            lblQuantidadeEstoque.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblQuantidadeEstoque.Location = new Point(43, 243);
-            lblQuantidadeEstoque.Name = "lblQuantidadeEstoque";
-            lblQuantidadeEstoque.Size = new Size(226, 28);
-            lblQuantidadeEstoque.TabIndex = 91;
-            lblQuantidadeEstoque.Text = "Quantidade em estoque:";
+            lblNome.AutoSize = true;
+            lblNome.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblNome.Location = new Point(43, 91);
+            lblNome.Name = "lblNome";
+            lblNome.Size = new Size(70, 28);
+            lblNome.TabIndex = 90;
+            lblNome.Text = "Nome:";
             // 
-            // txtQuantidade
-            // 
-            txtQuantidade.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtQuantidade.Location = new Point(275, 240);
-            txtQuantidade.Margin = new Padding(3, 4, 3, 4);
-            txtQuantidade.Name = "txtQuantidade";
-            txtQuantidade.Size = new Size(500, 34);
-            txtQuantidade.TabIndex = 90;
-            // 
-            // TelaProdutoForm
+            // TelaFornecedorForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(815, 415);
-            Controls.Add(lblQuantidadeEstoque);
-            Controls.Add(txtQuantidade);
-            Controls.Add(lblValorUnitario);
+            ClientSize = new Size(897, 320);
+            Controls.Add(lblNome);
+            Controls.Add(lblEndereco);
             Controls.Add(txtValor);
-            Controls.Add(lblTitulo);
-            Controls.Add(cmbFornecedores);
             Controls.Add(btnCancelar);
             Controls.Add(btnGravar);
             Controls.Add(txtId);
             Controls.Add(lblId);
             Controls.Add(txtTitulo);
-            Controls.Add(labelFornecedor);
             Margin = new Padding(3, 4, 3, 4);
-            Name = "TelaProdutoForm";
-            Text = "Cadastro de produto";
+            Name = "TelaFornecedorForm";
+            Text = "Cadastro de fornecedor";
             ResumeLayout(false);
             PerformLayout();
         }
@@ -207,9 +167,10 @@
         private Button btnGravar;
         private ComboBox cmbFornecedores;
         private Label lblTitulo;
-        private Label lblValorUnitario;
+        private Label lblEndereco;
         private TextBox txtValor;
         private Label lblQuantidadeEstoque;
         private TextBox txtQuantidade;
+        private Label lblNome;
     }
 }
