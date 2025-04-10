@@ -1,0 +1,1 @@
+﻿global using LaboratorioDeProgramacao.Infra.Dados.Sql.Compartilhado;
