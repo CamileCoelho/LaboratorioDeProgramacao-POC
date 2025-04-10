@@ -1,11 +1,9 @@
 ﻿using LaboratorioDeProgramacao.Dominio.ModuloProduto;
 using LaboratorioDeProgramacao.Dominio.ModuloVenda;
-using LaboratorioDeProgramacao.Infra.Dados.Sql.ModuloVenda;
-using System.Text.RegularExpressions;
 
 namespace LaboratorioDeProgramacao.WinApp.ModuloVenda
 {
-    public class ControladorVenda : ControladorBase
+    public class ControladorVenda : ControladorCupom
     {
         private readonly IRepositorioVenda repositorioVenda;
         private readonly IRepositorioProduto repositorioProduto;
@@ -16,17 +14,6 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloVenda
             this.repositorioVenda = repositorioVenda;
             this.repositorioProduto = repositorioProduto;
         }
-
-        public override string ToolTipInserir => TelaPrincipalForm.servicoDeTraducao.ObterTexto("RegisterSale");
-        public override string ToolTipEditar => TelaPrincipalForm.servicoDeTraducao.ObterTexto("EditSale");
-        public override string ToolTipExcluir => TelaPrincipalForm.servicoDeTraducao.ObterTexto("DeleteSale");
-        public override string ToolTipHome => TelaPrincipalForm.servicoDeTraducao.ObterTexto("GoToHome");
-
-        public override bool HomeHabilitado => true;
-        public override bool InserirHabilitado => true;
-        public override bool EditarHabilitado => true;
-        public override bool EditarVisivel => true;
-        public override bool ExcluirHabilitado => true;
 
         public override void Inserir()
         {
@@ -52,6 +39,24 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloVenda
             }
             else
                 TelaPrincipalForm.Tela.AtualizarRodape("");
+        }
+
+        public override void GerarPdf()
+        {
+            var vendaSelecionada = ObterVendaSelecionada();
+
+            if (vendaSelecionada == null)
+            {
+                MessageBox.Show(
+                    TelaPrincipalForm.servicoDeTraducao.ObterTexto("SelectSaleWarning"),
+                    TelaPrincipalForm.servicoDeTraducao.ObterTexto("GenerateReceipt"),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation
+                );
+                return;
+            }
+
+            GerarPdfCupom(vendaSelecionada); 
         }
 
         public override void Editar()
@@ -137,8 +142,8 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloVenda
 
         private string ValidarVenda(Venda venda)
         {
-            if (!Regex.IsMatch(venda.cpf, @"^\d{3}\.\d{3}\.\d{3}\-\d{2}$"))
-                return TelaPrincipalForm.servicoDeTraducao.ObterTexto("InvalidCpf");
+            //if (!Regex.IsMatch(venda.cpf, @"^\d{3}\.\d{3}\.\d{3}\-\d{2}$"))
+            //    return TelaPrincipalForm.servicoDeTraducao.ObterTexto("InvalidCpf");
 
             if (venda.data.Date > DateTime.Today)
                 return TelaPrincipalForm.servicoDeTraducao.ObterTexto("FutureDateError");

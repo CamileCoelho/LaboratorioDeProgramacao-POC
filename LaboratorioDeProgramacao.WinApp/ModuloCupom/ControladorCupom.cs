@@ -1,206 +1,104 @@
-﻿
-namespace LaboratorioDeProgramacao.WinApp.ModuloCupom
+﻿using iText.Kernel.Colors;
+using iText.Kernel.Pdf.Canvas.Draw;
+using iText.Kernel.Pdf;
+using iText.Layout.Element;
+using iText.Layout.Properties;
+using LaboratorioDeProgramacao.Dominio.ModuloVenda;
+using LaboratorioDeProgramacao.WinApp;
+using iText.Layout;
+
+public class ControladorCupom : ControladorBase
 {
-    public class ControladorCupom : ControladorBase
+    public override string ToolTipInserir => TelaPrincipalForm.servicoDeTraducao.ObterTexto("RegisterSale");
+    public override string ToolTipEditar => TelaPrincipalForm.servicoDeTraducao.ObterTexto("EditSale");
+    public override string ToolTipExcluir => TelaPrincipalForm.servicoDeTraducao.ObterTexto("DeleteSale");
+    public override string ToolTipHome => TelaPrincipalForm.servicoDeTraducao.ObterTexto("GoToHome");
+
+
+    public override bool GerarPdfHabilitado => true;
+    public override bool GerarPdfVisivel => true;
+    public override bool SeparadorVisivel4 => true;
+    public override bool HomeHabilitado => true;
+    public override bool InserirHabilitado => true;
+    public override bool EditarHabilitado => true;
+    public override bool EditarVisivel => true;
+    public override bool ExcluirHabilitado => true;
+
+    public override void Excluir()
     {
-        //IRepositorioProduto repositorioDisciplina;
-        //IRepositorioTeste repositorioTeste;
-        //TabelaTesteControl tabelaTeste;
+        throw new NotImplementedException();
+    }
 
-        //public ControladorCupom(IRepositorioTeste repositorioTeste, IRepositorioProduto repositorioDisciplina)
-        //{
-        //    this.repositorioTeste = repositorioTeste;
-        //    this.repositorioDisciplina = repositorioDisciplina;
-        //}
+    public override void Inserir()
+    {
+        throw new NotImplementedException();
+    }
 
-        //public override string ToolTipInserir => "Cadastrar Teste";
-        //public override string ToolTipDuplicar => "Duplicar Teste Existente";
-        //public override string ToolTipExcluir => "Excluir Teste Existente";
-        //public override string ToolTipVisualizar => "Visualizar Detalhes Teste Existente";
-        //public override string ToolTipGerarPdf => "Gerar PDF de um Teste Existente";
-        //public override string ToolTipHome => "Voltar a tela inicial";
+    public override UserControl ObterListagem()
+    {
+        throw new NotImplementedException();
+    }
 
-        //public override bool HomeHabilitado => true;
-        //public override bool InserirHabilitado => true;
-        //public override bool DuplicarHabilitado => true;
-        //public override bool DuplicarVisivel => true;
-        //public override bool ExcluirHabilitado => true;
-        //public override bool VisualizarHabilitado => true;
-        //public override bool VisualizarVisivel => true;
-        //public override bool GerarPdfHabilitado => true;
-        //public override bool GerarPdfVisivel => true;
-        //public override bool SeparadorVisivel3 => true;
-        //public override bool SeparadorVisivel4 => true;
-
-        //public override void Inserir()
-        //{
-        //    TelaTesteForm tela = new(repositorioTeste.SelecionarTodos(), repositorioDisciplina.SelecionarTodos());
-
-        //    if (tela.ShowDialog() == DialogResult.OK)
-        //    {
-        //        Teste teste = tela.ObterTeste();
-
-        //        repositorioTeste.Inserir(teste);
-
-        //        CarregarTeste();
-        //    }
-        //    else
-        //    {
-        //        TelaPrincipalForm.Tela.AtualizarRodape("");
-        //    }
-        //}
-
-        //public override void Duplicar()
-        //{
-        //    Teste testeSelecionado = ObterTesteSelecionado();
-
-        //    if (testeSelecionado == null)
-        //    {
-        //        MessageBox.Show($"Selecione um questao primeiro!",
-        //            "Edição de clientes",
-        //            MessageBoxButtons.OK,
-        //            MessageBoxIcon.Exclamation);
-        //        return;
-        //    }
-
-        //    TelaTesteForm tela = new(repositorioTeste.SelecionarTodos(), repositorioDisciplina.SelecionarTodos());
-
-        //    tela.ConfigurarTelaDuplicacao(testeSelecionado);
-
-        //    if (tela.ShowDialog() == DialogResult.OK)
-        //    {
-        //        Teste teste = tela.ObterTeste();
-
-        //        repositorioTeste.Inserir(teste);
-
-        //        CarregarTeste();
-        //    }
-        //    else
-        //    {
-        //        TelaPrincipalForm.Tela.AtualizarRodape("");
-        //    }
-        //}
-
-        //public override void Excluir()
-        //{
-        //    Teste testeSelecionado = ObterTesteSelecionado();
-
-        //    if (testeSelecionado == null)
-        //    {
-        //        MessageBox.Show($"Selecione um teste primeiro!",
-        //            "Exclusão de Testes",
-        //            MessageBoxButtons.OK,
-        //            MessageBoxIcon.Exclamation);
-
-        //        return;
-        //    }
-
-        //    DialogResult opcaoEscolhida = MessageBox.Show(
-        //        $"Deseja excluir o questao {testeSelecionado.id}?",
-        //        "Exclusão de Questóes",
-        //        MessageBoxButtons.OKCancel,
-        //        MessageBoxIcon.Question);
-
-        //    if (opcaoEscolhida == DialogResult.OK)
-        //    {
-        //        repositorioTeste.Excluir(testeSelecionado);
-
-        //        CarregarTeste();
-        //    }
-        //}
-
-        //public override void VisualizarTeste()
-        //{
-        //    Teste testeSelecionado = ObterTesteSelecionado();
-
-        //    if (testeSelecionado == null)
-        //    {
-        //        MessageBox.Show($"Selecione um teste primeiro!",
-        //            "Exclusão de Testes",
-        //            MessageBoxButtons.OK,
-        //            MessageBoxIcon.Exclamation);
-
-        //        return;
-        //    }
-
-        //    TelaTesteForm tela = new(repositorioTeste.SelecionarTodos(), repositorioDisciplina.SelecionarTodos());
-
-        //    tela.ConfigurarTelaVisualizarDetalhes(testeSelecionado);
-
-        //    if (tela.ShowDialog() == DialogResult.OK)
-        //        TelaPrincipalForm.Tela.AtualizarRodape("");
-        //    else
-        //        TelaPrincipalForm.Tela.AtualizarRodape("");
-        //}
-
-        //public override void GerarPdf()
-        //{
-        //    Teste testeSelecionado = ObterTesteSelecionado();
-
-        //    if (testeSelecionado == null)
-        //    {
-        //        MessageBox.Show($"Selecione um teste primeiro!",
-        //            "Exclusão de Testes",
-        //            MessageBoxButtons.OK,
-        //            MessageBoxIcon.Exclamation);
-
-        //        return;
-        //    }
-
-        //    TelaGerarPdfForm telaPdf = new(testeSelecionado);
-
-        //    telaPdf.ConfigurarTelaPdf(testeSelecionado);
-
-        //    if (telaPdf.ShowDialog() == DialogResult.OK)
-        //    {
-        //        CarregarTeste();
-        //    }
-
-        //    TelaPrincipalForm.Tela.AtualizarRodape("");
-        //}
-
-        //private void CarregarTeste()
-        //{
-        //    List<Teste> testes = repositorioTeste.SelecionarTodos();
-
-        //    tabelaTeste.AtualizarRegistros(testes);
-        //}
-
-        //private Teste ObterTesteSelecionado()
-        //{
-        //    int id = tabelaTeste.ObterNumeroTesteSelecionado();
-
-        //    return repositorioTeste.SelecionarPorId(id);
-        //}
-
-        //public override UserControl ObterListagem()
-        //{
-        //    if (tabelaTeste == null)
-        //        tabelaTeste = new TabelaTesteControl();
-
-        //    CarregarTeste();
-
-        //    return tabelaTeste;
-        //}
-        public override string ToolTipInserir => throw new NotImplementedException();
-
-        public override string ToolTipExcluir => throw new NotImplementedException();
-
-        public override string ToolTipHome => throw new NotImplementedException();
-
-        public override void Excluir()
+    protected void GerarPdfCupom(Venda venda)
+    {
+        if (venda == null)
         {
-            throw new NotImplementedException();
+            MessageBox.Show("Selecione uma venda primeiro!", "Cupom Fiscal", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            return;
         }
 
-        public override void Inserir()
+        string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads", "CupomFiscal.pdf");
+
+        using (PdfWriter writer = new PdfWriter(path))
+        using (PdfDocument pdf = new PdfDocument(writer))
+        using (Document document = new Document(pdf))
         {
-            throw new NotImplementedException();
+            document.SetMargins(20, 20, 20, 20);
+
+            LineSeparator linhaSolida = new LineSeparator(new SolidLine()).SetWidth(UnitValue.CreatePercentValue(100));
+            document.Add(linhaSolida);
+
+            document.Add(new Paragraph("Empresa SUPERMERCADO CENTRAL LTDA")
+                .SetBold()
+                .SetFontSize(14)
+                .SetFontColor(ColorConstants.BLACK)
+                .SetMarginTop(5)
+                .SetMarginBottom(5));
+
+            document.Add(new Paragraph(new string('*', 142)).SetFontSize(10));
+
+            document.Add(new Paragraph($"Cliente: {venda.cpf}")
+                .SetMarginTop(10)
+                .SetFontSize(10));
+
+            decimal total = 0;
+            int index = 1;
+
+            foreach (var item in venda.itens)
+            {
+                decimal subtotal = item.produto.valorUnitario * item.quantidade;
+                total += subtotal;
+
+                document.Add(new Paragraph($"{index++}. {item.produto.titulo} x{item.quantidade} = R$ {subtotal:F2}")
+                    .SetFontSize(10)
+                    .SetMarginBottom(2));
+            }
+
+            document.Add(new Paragraph($"{index++}. Total: R$ {total:F2}")
+                .SetFontSize(10)
+                .SetBold()
+                .SetMarginBottom(2));
+
+            document.Add(new Paragraph(new string('*', 142)).SetFontSize(10));
+
+            document.Add(new Paragraph($"Pagamento: {venda.formaPagamento}")
+                .SetFontSize(10));
+
+            document.Add(new LineSeparator(new DashedLine())
+                .SetMarginTop(10)
+                .SetMarginBottom(5));
         }
 
-        public override UserControl ObterListagem()
-        {
-            throw new NotImplementedException();
-        }
+        MessageBox.Show("Cupom fiscal gerado com sucesso!", "PDF Gerado", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 }

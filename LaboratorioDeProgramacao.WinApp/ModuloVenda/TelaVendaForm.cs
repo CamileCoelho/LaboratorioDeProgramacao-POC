@@ -69,19 +69,22 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloVenda
         {
             if (cmbItens.SelectedItem is not Produto produtoSelecionado)
             {
-                MessageBox.Show(
-                    TelaPrincipalForm.servicoDeTraducao.ObterTexto("SelectProductWarning"),
-                    TelaPrincipalForm.servicoDeTraducao.ObterTexto("Warning"),
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(TelaPrincipalForm.servicoDeTraducao.ObterTexto("SelectProductWarning"),
+                                "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (!int.TryParse(txtQuantidade.Text, out int quantidade) || quantidade <= 0)
             {
-                MessageBox.Show(
-                    TelaPrincipalForm.servicoDeTraducao.ObterTexto("InvalidQuantityWarning"),
-                    TelaPrincipalForm.servicoDeTraducao.ObterTexto("Warning"),
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(TelaPrincipalForm.servicoDeTraducao.ObterTexto("InvalidQuantityWarning"),
+                                "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (quantidade > produtoSelecionado.quantidade)
+            {
+                MessageBox.Show(TelaPrincipalForm.servicoDeTraducao.ObterTexto("InsufficientStockWarning"),
+                                "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 

@@ -7,12 +7,14 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloFornecedor
     public class ControladorFornecedor : ControladorBase
     {
         private readonly IRepositorioFornecedor repositorioFornecedor;
+        private readonly IRepositorioProduto repositorioProduto;
 
         private TabelaFornecedorControl tabelaFornecedor = new();
 
-        public ControladorFornecedor(IRepositorioFornecedor repositorioFornecedor)
+        public ControladorFornecedor(IRepositorioFornecedor repositorioFornecedor, IRepositorioProduto repositorioProduto)
         {
             this.repositorioFornecedor = repositorioFornecedor;
+            this.repositorioProduto = repositorioProduto;
         }
 
         public override bool HomeHabilitado => true;
@@ -86,6 +88,19 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloFornecedor
                 return;
             }
 
+            bool fornecedorTemProdutos = repositorioProduto.SelecionarTodos()
+                .Any(p => p.fornecedor != null && p.fornecedor.id == fornecedorSelecionado.id);
+
+            if (fornecedorTemProdutos)
+            {
+                MessageBox.Show(
+                    TelaPrincipalForm.servicoDeTraducao.ObterTexto("SupplierHasLinkedProducts"),
+                    TelaPrincipalForm.servicoDeTraducao.ObterTexto("SupplierDeleteTitle"),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
             DialogResult opcaoEscolhida = MessageBox.Show(
                 string.Format(TelaPrincipalForm.servicoDeTraducao.ObterTexto("ConfirmSupplierDeletion"), fornecedorSelecionado.nome),
                 TelaPrincipalForm.servicoDeTraducao.ObterTexto("SupplierDeleteTitle"),
@@ -95,7 +110,6 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloFornecedor
             if (opcaoEscolhida == DialogResult.OK)
             {
                 repositorioFornecedor.Excluir(fornecedorSelecionado);
-
                 CarregarFornecedores();
             }
         }

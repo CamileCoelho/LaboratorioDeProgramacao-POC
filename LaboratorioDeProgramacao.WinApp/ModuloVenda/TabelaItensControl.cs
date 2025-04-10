@@ -30,7 +30,7 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloVenda
 
         public int ObterNumeroItemSelecionado()
         {
-            return gridAlternativas.SelecionarLetra<int>();
+            return gridAlternativas.SelecionarNumero<int>();
         }
 
         public void AtualizarRegistros(List<ItemVenda> itens)

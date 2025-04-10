@@ -53,7 +53,7 @@ namespace LaboratorioDeProgramacao.WinApp
 
         private void FornecedoresMenuItem_Click(object sender, EventArgs e)
         {
-            controlador = new ControladorFornecedor(repositorioFornecedor);
+            controlador = new ControladorFornecedor(repositorioFornecedor, repositorioProduto);
 
             ConfigurarTelaPrincipal(controlador);
         }
