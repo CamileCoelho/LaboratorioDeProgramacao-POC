@@ -59,5 +59,16 @@
   "CreditCard": "Cartão de Crédito",
   "DebitCard": "Cartão de Débito",
   "Pix": "Pix",
-  "BankSlip": "Boleto Bancário"
+  "BankSlip": "Boleto Bancário",
+  "RegisterSale": "Cadastrar Venda",
+  "EditSale": "Editar Venda",
+  "DeleteSale": "Excluir Venda",
+  "GoToHome": "Voltar para a tela inicial",
+  "SelectSaleWarning": "Selecione uma venda primeiro!",
+  "DeleteSaleConfirmation": "Deseja excluir a venda de ID {0}?",
+  "FutureDateError": "A data da venda não pode ser no futuro.",
+  "EmptyItemsError": "A venda deve conter pelo menos um item.",
+  "InvalidItemQuantity": "Todos os itens devem ter quantidade maior que zero.",
+  "PdfGeneratedSuccessfully": "Cupom fiscal gerado com sucesso!",
+  "PdfGeneratedTitle": "PDF Gerado"
 }
