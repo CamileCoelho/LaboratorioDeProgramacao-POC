@@ -8,10 +8,10 @@
 
             DataGridViewCellStyle linhaEscura = new DataGridViewCellStyle
             {
-                BackColor = Color.RosyBrown,
+                BackColor = Color.Gray,
                 Font = font,
                 ForeColor = Color.Black,
-                SelectionBackColor = Color.Gray,
+                SelectionBackColor = Color.Teal,
                 SelectionForeColor = Color.Black
             };
 
@@ -19,10 +19,10 @@
 
             DataGridViewCellStyle linhaClara = new DataGridViewCellStyle
             {
-                BackColor = Color.White,
+                BackColor = Color.LightGray,
                 Font = font,
                 ForeColor = Color.Black,
-                SelectionBackColor = Color.Gray,
+                SelectionBackColor = Color.Teal,
                 SelectionForeColor = Color.Black
             };
 
@@ -34,8 +34,8 @@
             grid.RowHeadersVisible = false;
 
             grid.EnableHeadersVisualStyles = false;
-            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.RosyBrown;
-            grid.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.RosyBrown;
+            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.Gray;
+            grid.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.Gray;
 
             grid.AllowUserToAddRows = false;
             grid.AllowUserToDeleteRows = false;

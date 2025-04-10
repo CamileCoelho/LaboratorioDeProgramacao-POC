@@ -1,7 +1,9 @@
-﻿using LaboratorioDeProgramacao.Dominio.ModuloDisciplina;
+﻿using LaboratorioDeProgramacao.Dominio.ModuloFornecedor;
 using LaboratorioDeProgramacao.Dominio.ModuloMateria;
+using LaboratorioDeProgramacao.Dominio.ModuloProduto;
 using LaboratorioDeProgramacao.Dominio.ModuloQuestao;
 using LaboratorioDeProgramacao.Dominio.ModuloTeste;
+using LaboratorioDeProgramacao.Dominio.ModuloVenda;
 using LaboratorioDeProgramacao.WinApp.ModuloQuestao;
 
 namespace LaboratorioDeProgramacao.WinApp.ModuloTeste
@@ -14,7 +16,7 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloTeste
         Teste testeSelecionado { get; set; }
         TabelaQuestoesTesteControl tabelaQuestoesTeste { get; set; }
 
-        public TelaTesteForm(List<Teste> testes, List<Disciplina> disciplinas)
+        public TelaTesteForm(List<Teste> testes, List<Produto> disciplinas)
         {
             InitializeComponent();
 
@@ -40,7 +42,7 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloTeste
 
             string titulo = txtTitulo.Text.Trim();
 
-            Disciplina disciplina = (Disciplina)cmbDisciplina.SelectedItem;
+            Produto disciplina = (Produto)cmbDisciplina.SelectedItem;
 
             List<Materia> materias = new();
 
@@ -178,19 +180,19 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloTeste
 
         private void cmbDisciplina_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((Disciplina)cmbDisciplina.SelectedItem != null)
+            if ((Produto)cmbDisciplina.SelectedItem != null)
             {
                 cmbMaterias.Enabled = true;
             }
 
-            CarregarMaterias(((Disciplina)cmbDisciplina.SelectedItem).materias);
+            CarregarMaterias(((Produto)cmbDisciplina.SelectedItem).materias);
         }
 
-        private void CarregarDisciplinas(List<Disciplina> disciplinas)
+        private void CarregarDisciplinas(List<Produto> disciplinas)
         {
             cmbDisciplina.Items.Clear();
 
-            foreach (Disciplina disciplina in disciplinas)
+            foreach (Produto disciplina in disciplinas)
             {
                 cmbDisciplina.Items.Add(disciplina);
             }

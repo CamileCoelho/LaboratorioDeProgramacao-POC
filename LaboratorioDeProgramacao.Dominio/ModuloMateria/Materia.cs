@@ -1,5 +1,7 @@
-﻿using LaboratorioDeProgramacao.Dominio.ModuloDisciplina;
+﻿using LaboratorioDeProgramacao.Dominio.ModuloFornecedor;
+using LaboratorioDeProgramacao.Dominio.ModuloProduto;
 using LaboratorioDeProgramacao.Dominio.ModuloQuestao;
+using LaboratorioDeProgramacao.Dominio.ModuloVenda;
 
 namespace LaboratorioDeProgramacao.Dominio.ModuloMateria
 {
@@ -8,7 +10,7 @@ namespace LaboratorioDeProgramacao.Dominio.ModuloMateria
     {
         public string serie { get; set; }
         public string titulo { get; set; }
-        public Disciplina disciplina { get; set; }
+        public Produto disciplina { get; set; }
         public List<Questao> questoes { get; set; } = new();
         public int? qtdQuestoesMateria { get { return questoes?.Count(); } }
 
@@ -17,7 +19,7 @@ namespace LaboratorioDeProgramacao.Dominio.ModuloMateria
 
         }
 
-        public Materia( int id, string titulo, Disciplina disciplina, string serie)
+        public Materia( int id, string titulo, Produto disciplina, string serie)
         {
             this.id = id;
             this.titulo = titulo;

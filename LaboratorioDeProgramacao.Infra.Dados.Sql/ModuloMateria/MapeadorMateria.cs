@@ -1,6 +1,8 @@
 ﻿using System.Data.SqlClient;
-using LaboratorioDeProgramacao.Dominio.ModuloDisciplina;
+using LaboratorioDeProgramacao.Dominio.ModuloFornecedor;
 using LaboratorioDeProgramacao.Dominio.ModuloMateria;
+using LaboratorioDeProgramacao.Dominio.ModuloProduto;
+using LaboratorioDeProgramacao.Dominio.ModuloVenda;
 
 namespace LaboratorioDeProgramacao.Infra.Dados.Sql.ModuloMateria
 {
@@ -21,7 +23,7 @@ namespace LaboratorioDeProgramacao.Infra.Dados.Sql.ModuloMateria
             int disciplinaId = Convert.ToInt32(leitorRegistros["DISCIPLINA_ID"]);
             string serie = Convert.ToString(leitorRegistros["MATERIA_SERIE"]);
 
-            Disciplina disciplina = new Disciplina(disciplinaId, Convert.ToString(leitorRegistros["DISCIPLINA_NOME"]));
+            Produto disciplina = new Produto(disciplinaId, Convert.ToString(leitorRegistros["DISCIPLINA_NOME"]));
 
             return new Materia(id, nome, disciplina, serie);
         }

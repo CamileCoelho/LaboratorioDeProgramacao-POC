@@ -11,4 +11,10 @@
     <ProjectReference Include="..\LaboratorioDeProgramacao.Dominio\LaboratorioDeProgramacao.Dominio.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ModuloFornecedor\" />
+    <Folder Include="ModuloProduto\" />
+    <Folder Include="ModuloVenda\" />
+  </ItemGroup>
+
 </Project>

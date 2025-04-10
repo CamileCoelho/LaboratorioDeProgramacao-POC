@@ -1,15 +1,15 @@
-﻿using LaboratorioDeProgramacao.Dominio.ModuloDisciplina;
+﻿using LaboratorioDeProgramacao.Dominio.ModuloProduto;
 using LaboratorioDeProgramacao.Dominio.ModuloTeste;
 
 namespace LaboratorioDeProgramacao.WinApp.ModuloTeste
 {
     public class ControladorTeste : ControladorBase
     {
-        IRepositorioDisciplina repositorioDisciplina;
+        IRepositorioProduto repositorioDisciplina;
         IRepositorioTeste repositorioTeste;
         TabelaTesteControl tabelaTeste;
 
-        public ControladorTeste(IRepositorioTeste repositorioTeste, IRepositorioDisciplina repositorioDisciplina)
+        public ControladorTeste(IRepositorioTeste repositorioTeste, IRepositorioProduto repositorioDisciplina)
         {
             this.repositorioTeste = repositorioTeste;
             this.repositorioDisciplina = repositorioDisciplina;

@@ -1,6 +1,8 @@
-﻿using LaboratorioDeProgramacao.Dominio.ModuloDisciplina;
+﻿using LaboratorioDeProgramacao.Dominio.ModuloFornecedor;
 using LaboratorioDeProgramacao.Dominio.ModuloMateria;
+using LaboratorioDeProgramacao.Dominio.ModuloProduto;
 using LaboratorioDeProgramacao.Dominio.ModuloQuestao;
+using LaboratorioDeProgramacao.Dominio.ModuloVenda;
 
 namespace LaboratorioDeProgramacao.WinApp.ModuloQuestao
 {
@@ -16,7 +18,7 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloQuestao
 
         Dictionary<int, string> meuDicionario { get; set; }
 
-        public TelaQuestaoForm(List<Questao> questoes, List<Disciplina> disciplinas)
+        public TelaQuestaoForm(List<Questao> questoes, List<Produto> disciplinas)
         {
             InitializeComponent();
 
@@ -51,7 +53,7 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloQuestao
         {
             int id = Convert.ToInt32(txtId.Text);
 
-            Disciplina disciplina = (Disciplina)cmbDisciplina.SelectedItem;
+            Produto disciplina = (Produto)cmbDisciplina.SelectedItem;
 
             Materia materia = (Materia)cmbMaterias.SelectedItem;
 
@@ -186,11 +188,11 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloQuestao
             return;
         }
 
-        private void CarregarDisciplinas(List<Disciplina> disciplinas)
+        private void CarregarDisciplinas(List<Produto> disciplinas)
         {
             cmbDisciplina.Items.Clear();
 
-            foreach (Disciplina disciplina in disciplinas)
+            foreach (Produto disciplina in disciplinas)
             {
                 cmbDisciplina.Items.Add(disciplina);
             }
@@ -218,12 +220,12 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloQuestao
 
         private void cmbDisciplina_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((Disciplina)cmbDisciplina.SelectedItem != null)
+            if ((Produto)cmbDisciplina.SelectedItem != null)
             {
                 cmbMaterias.Enabled = true;
             }
 
-            CarregarMaterias(((Disciplina)cmbDisciplina.SelectedItem).materias);
+            CarregarMaterias(((Produto)cmbDisciplina.SelectedItem).materias);
         }
 
         private void cmbAlternativas_SelectedIndexChanged(object sender, EventArgs e)

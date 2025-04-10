@@ -1,9 +1,11 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
-using LaboratorioDeProgramacao.Dominio.ModuloDisciplina;
+using LaboratorioDeProgramacao.Dominio.ModuloFornecedor;
 using LaboratorioDeProgramacao.Dominio.ModuloMateria;
+using LaboratorioDeProgramacao.Dominio.ModuloProduto;
 using LaboratorioDeProgramacao.Dominio.ModuloQuestao;
 using LaboratorioDeProgramacao.Dominio.ModuloTeste;
+using LaboratorioDeProgramacao.Dominio.ModuloVenda;
 
 namespace LaboratorioDeProgramacao.Infra.Dados.Json.Compartilhado
 {
@@ -11,7 +13,7 @@ namespace LaboratorioDeProgramacao.Infra.Dados.Json.Compartilhado
     {
         private const string NOME_ARQUIVO = "TestesDonaMariana.json";
 
-        public List<Disciplina> disciplinas { get; set; }
+        public List<Produto> disciplinas { get; set; }
         public List<Materia> materias { get; set; }
         public List<Questao> questoes { get; set; }
         public List<Teste> testes { get; set; }

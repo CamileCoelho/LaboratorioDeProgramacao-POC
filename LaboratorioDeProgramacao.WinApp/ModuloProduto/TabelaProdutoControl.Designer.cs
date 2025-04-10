@@ -1,6 +1,6 @@
-﻿namespace LaboratorioDeProgramacao.WinApp.ModuloMateria
+﻿namespace LaboratorioDeProgramacao.WinApp.ModuloDiciplina
 {
-    partial class TabelaMateriaControl
+    partial class TabelaProdutoControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -39,15 +39,16 @@
             grid.Location = new Point(0, 0);
             grid.Name = "grid";
             grid.RowTemplate.Height = 25;
-            grid.Size = new Size(150, 150);
-            grid.TabIndex = 3;
+            grid.Size = new Size(784, 480);
+            grid.TabIndex = 1;
             // 
-            // TabelaMateriaControl
+            // TabelaDisciplinaControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(grid);
-            Name = "TabelaMateriaControl";
+            Name = "TabelaDisciplinaControl";
+            Size = new Size(784, 480);
             ((System.ComponentModel.ISupportInitialize)grid).EndInit();
             ResumeLayout(false);
         }

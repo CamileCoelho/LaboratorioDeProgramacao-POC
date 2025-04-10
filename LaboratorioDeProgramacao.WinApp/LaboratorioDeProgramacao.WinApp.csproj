@@ -18,12 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="ModuloDisciplina\TabelaDisciplinaControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="ModuloMateria\TabelaMateriaControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="ModuloQuestao\TabelaAlternativasControl.cs" />
     <Compile Update="ModuloQuestao\TabelaQuestaoControl.cs">
       <SubType>UserControl</SubType>
@@ -49,6 +43,11 @@
    <None Update="Resources\*.json">
     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ModuloVenda\" />
+    <Folder Include="ModuloFornecedor\" />
   </ItemGroup>
 
 </Project>

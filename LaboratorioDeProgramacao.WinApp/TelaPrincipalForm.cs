@@ -1,5 +1,5 @@
-using LaboratorioDeProgramacao.Dominio.ModuloDisciplina;
 using LaboratorioDeProgramacao.Dominio.ModuloMateria;
+using LaboratorioDeProgramacao.Dominio.ModuloProduto;
 using LaboratorioDeProgramacao.Dominio.ModuloQuestao;
 using LaboratorioDeProgramacao.Dominio.ModuloTeste;
 using LaboratorioDeProgramacao.Infra.Dados.Sql.ModuloDisciplina;
@@ -19,14 +19,14 @@ namespace LaboratorioDeProgramacao.WinApp
     {
         private ControladorBase controlador;
 
-        private IRepositorioDisciplina repositorioDisciplina = new RepositorioDisciplinaSql();
+        private IRepositorioProduto repositorioDisciplina = new RepositorioProdutoSql();
         private IRepositorioMateria repositorioMateria = new RepositorioMateriaSql();
         private IRepositorioQuestao repositorioQuestao = new RepositorioQuestaoSql();
         private IRepositorioTeste repositorioTeste = new RepositorioTesteSql();
 
         public static TelaPrincipalForm Tela { get; private set; }
 
-        public static ServicoDeTraducao translationService = new ServicoDeTraducao();
+        public static ServicoDeTraducao servicoDeTraducao = new ServicoDeTraducao();
 
         public TelaPrincipalForm()
         {
@@ -94,19 +94,19 @@ namespace LaboratorioDeProgramacao.WinApp
 
         private void ConfigurarToolTips(ControladorBase controlador)
         {
-            btnInserir.ToolTipText = translationService.ObterTexto("Insert");
-            btnEditar.ToolTipText = translationService.ObterTexto("Edit");
-            btnDuplicar.ToolTipText = translationService.ObterTexto("Duplicate");
-            btnExcluir.ToolTipText = translationService.ObterTexto("Delete");
-            btnFiltrar.ToolTipText = translationService.ObterTexto("Filter");
-            btnAdicionarItens.ToolTipText = translationService.ObterTexto("AddItems");
-            btnRemoverItens.ToolTipText = translationService.ObterTexto("RemoveItems");
-            btnFinalizarPgto.ToolTipText = translationService.ObterTexto("FinalizePayment");
-            btnConfigDesconto.ToolTipText = translationService.ObterTexto("DiscountSettings");
-            btnVisualizar.ToolTipText = translationService.ObterTexto("View");
-            btnVisualizarGabarito.ToolTipText = translationService.ObterTexto("ViewAnswerKey");
-            btnGerarPdf.ToolTipText = translationService.ObterTexto("GeneratePdf");
-            btnHome.ToolTipText = translationService.ObterTexto("Home");
+            btnInserir.ToolTipText = servicoDeTraducao.ObterTexto("Insert");
+            btnEditar.ToolTipText = servicoDeTraducao.ObterTexto("Edit");
+            btnDuplicar.ToolTipText = servicoDeTraducao.ObterTexto("Duplicate");
+            btnExcluir.ToolTipText = servicoDeTraducao.ObterTexto("Delete");
+            btnFiltrar.ToolTipText = servicoDeTraducao.ObterTexto("Filter");
+            btnAdicionarItens.ToolTipText = servicoDeTraducao.ObterTexto("AddItems");
+            btnRemoverItens.ToolTipText = servicoDeTraducao.ObterTexto("RemoveItems");
+            btnFinalizarPgto.ToolTipText = servicoDeTraducao.ObterTexto("FinalizePayment");
+            btnConfigDesconto.ToolTipText = servicoDeTraducao.ObterTexto("DiscountSettings");
+            btnVisualizar.ToolTipText = servicoDeTraducao.ObterTexto("View");
+            btnVisualizarGabarito.ToolTipText = servicoDeTraducao.ObterTexto("ViewAnswerKey");
+            btnGerarPdf.ToolTipText = servicoDeTraducao.ObterTexto("GeneratePdf");
+            btnHome.ToolTipText = servicoDeTraducao.ObterTexto("Home");
 
 
             btnInserir.Enabled = controlador.InserirHabilitado;
@@ -147,13 +147,13 @@ namespace LaboratorioDeProgramacao.WinApp
 
         private void ConfigurarTextos()
         {
-            DisciplinasMenuItem.Text = translationService.ObterTexto("Disciplines");
-            materiasMenuItem.Text = translationService.ObterTexto("Subjects");
-            questoesMenuItem.Text = translationService.ObterTexto("Questions");
-            toolStripButtonSelectedLanguage.Text = translationService.ObterTexto("SelectedLanguage");
-            inglêsToolStripMenuItem.Text = translationService.ObterTexto("English");
-            portuguêsToolStripMenuItem.Text = translationService.ObterTexto("Portuguese");
-            espanholToolStripMenuItem.Text = translationService.ObterTexto("Spanish");
+            DisciplinasMenuItem.Text = servicoDeTraducao.ObterTexto("Disciplines");
+            materiasMenuItem.Text = servicoDeTraducao.ObterTexto("Subjects");
+            questoesMenuItem.Text = servicoDeTraducao.ObterTexto("Questions");
+            toolStripButtonSelectedLanguage.Text = servicoDeTraducao.ObterTexto("SelectedLanguage");
+            inglêsToolStripMenuItem.Text = servicoDeTraducao.ObterTexto("English");
+            portuguêsToolStripMenuItem.Text = servicoDeTraducao.ObterTexto("Portuguese");
+            espanholToolStripMenuItem.Text = servicoDeTraducao.ObterTexto("Spanish");
         }
 
         private void btnHome_Click(object sender, EventArgs e)

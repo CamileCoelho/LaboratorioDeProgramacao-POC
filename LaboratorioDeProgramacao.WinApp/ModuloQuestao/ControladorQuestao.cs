@@ -1,4 +1,4 @@
-﻿using LaboratorioDeProgramacao.Dominio.ModuloDisciplina;
+﻿using LaboratorioDeProgramacao.Dominio.ModuloProduto;
 using LaboratorioDeProgramacao.Dominio.ModuloQuestao;
 using LaboratorioDeProgramacao.Dominio.ModuloTeste;
 
@@ -8,10 +8,10 @@ namespace LaboratorioDeProgramacao.WinApp.ModuloQuestao
     {
         private IRepositorioTeste repositorioTeste;
         private IRepositorioQuestao repositorioQuestao;
-        private IRepositorioDisciplina repositorioDisciplina;
+        private IRepositorioProduto repositorioDisciplina;
         private TabelaQuestaoControl tabelaQuestao;
 
-        public ControladorQuestao(IRepositorioQuestao repositorioQuestao, IRepositorioDisciplina repositorioDisciplina, IRepositorioTeste repositorioTeste)
+        public ControladorQuestao(IRepositorioQuestao repositorioQuestao, IRepositorioProduto repositorioDisciplina, IRepositorioTeste repositorioTeste)
         {
             this.repositorioTeste = repositorioTeste;
             this.repositorioQuestao = repositorioQuestao;

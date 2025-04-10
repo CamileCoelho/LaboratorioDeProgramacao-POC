@@ -22,5 +22,14 @@
   "Home": "Início",
   "Save": "Gravar",
   "Cancel": "Cancelar",
-  "SubjectsCount": "Quantidade de Matérias"
+  "SubjectsCount": "Quantidade de Matérias",
+  "SelectDisciplineFirst": "Selecione uma disciplina primeiro!",
+  "DisciplineEditTitle": "Edição de Disciplina",
+  "DisciplineEditLinkedWarning": "Não é possível editar essa disciplina pois ela possui vínculo com ao menos uma matéria!",
+  "DisciplineDeleteTitle": "Exclusão de Disciplina",
+  "DisciplineDeleteLinkedWarning": "Não é possível remover essa disciplina pois ela possui vínculo com ao menos uma matéria!",
+  "ConfirmDisciplineDeletion": "Deseja excluir o item {0}?",
+  "InsertTooltip": "Inserir nova disciplina",
+  "DeleteTooltip": "Excluir disciplina selecionada",
+  "HomeTooltip": "Voltar para a tela inicial"
 }
